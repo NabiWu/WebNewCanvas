@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-
+use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -30,5 +30,6 @@ Route::group(['middleware'=>'api'], function(){
     Route::post('me', [AuthController::class, 'me']); 
 });
 
+Route::get('admin/getAllUsers', [UserController::class, 'getAllUsers']);
 
 
