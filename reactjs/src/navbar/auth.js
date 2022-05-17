@@ -20,14 +20,14 @@ function Auth() {
       <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
         <ul className="navbar-nav">
           <li className="nav-item">
-            <a className="nav-link" href="/">
+            <Link className="nav-link" href="/">
               Home
-            </a>
+            </Link>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="/dashboard">
+            <Link className="nav-link" href="/dashboard">
               Dashboard
-            </a>
+            </Link>
           </li>
           <li className="nav-item">
             <span role="button" className="nav-link" onClick={logoutUser}>
