@@ -3,13 +3,13 @@ import { Routes, Route, Link } from "react-router-dom";
 import Home from "../components/home";
 import Dashboard from "../components/dashboard";
 import AuthUser from "../components/AuthUser";
+import Setting from "../components/setting";
 
-function Auth() {
+function Admin() {
   const {token, logout} = AuthUser();
   const logoutUser = () => {
     if (token != undefined){
       logout();
-
     }
   }
 
@@ -30,9 +30,9 @@ function Auth() {
             </a>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="/setting">
+            <Link className="nav-link" to="/setting">
               Setting
-            </a>
+            </Link>
           </li>
           <li>
             <a className="nav-link" href="/admin/courses">
@@ -51,7 +51,7 @@ function Auth() {
           <Route path="/" element={<Home />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/setting" element={<Setting />} />
-          
+
           {/* <Route path="/admin/courses" element={<AdminCourse/>}/> */}
         </Routes>
       </div>
@@ -59,4 +59,4 @@ function Auth() {
   );
 }
 
-export default Auth;
+export default Admin;

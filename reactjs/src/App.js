@@ -1,6 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import AuthUser from "./components/AuthUser";
 import Guest from "./navbar/guest";
+import  Admin from "./navbar/admin";
 import Auth from "./navbar/auth";
 
 function App() {
@@ -15,7 +16,7 @@ function App() {
     } else if (userRole === "teacher") {
       return <Auth />;
     } else if (userRole === "admin") {
-      return <Auth />;
+      return <Admin />;
     }
   }
 
