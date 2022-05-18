@@ -1,0 +1,5 @@
+{
+    "require": {
+        "tomfordrumm/jwt-auth": "dev-develop"
+    }
+}
