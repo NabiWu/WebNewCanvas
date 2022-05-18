@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-
+use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -27,8 +27,9 @@ Route::post('register', [AuthController::class, 'register']);
 Route::group(['middleware'=>'api'], function(){
     Route::post('logout', [AuthController::class, 'logout']);
     Route::post('refresh', [AuthController::class, 'refresh']);
-    Route::post('me', [AuthController::class, 'me']); 
+    Route::get('me', [AuthController::class, 'me']); 
 });
 
-
+Route::get('admin/getAllUsers', [UserController::class, 'getAllUsers']);
+Route::put('admin/changeStatus', [UserController::class, 'changeStatus']);
 

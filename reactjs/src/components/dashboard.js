@@ -11,7 +11,7 @@ export default function Dashboard() {
   }, []);
 
   const fetchUserDetail = () => {
-    http.post('/me').then((res)=>{
+    http.get('/me').then((res)=>{
       setUserdetail(res.data);
     })
 

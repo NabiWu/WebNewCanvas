@@ -13,19 +13,19 @@ function Guest() {
       <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
         <ul className="navbar-nav">
           <li className="nav-item">
-            <a className="nav-link" href="/">
+            <Link className="nav-link" to="/">
               Home
-            </a>
+            </Link>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="/login">
+            <Link className="nav-link" to="/login">
               Login
-            </a>
+            </Link>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="/register">
+            <Link className="nav-link" to="/register">
               Register
-            </a>
+            </Link>
           </li>
         </ul>
       </nav>

@@ -14,6 +14,9 @@ export default function AuthUser() {
     const user_detail = JSON.parse(userString);
     return user_detail;
   };
+  const getRole = () => {
+    return getUser().role;
+  };
   const [token, setToken] = useState(getToken());
   const [user, setUser] = useState(getUser());
 
@@ -27,15 +30,19 @@ export default function AuthUser() {
   };
 
   const logout = () => {
-      sessionStorage.clear();
-      navigate('/login');
-  }
+    sessionStorage.clear();
+
+    http.post("/logout").then((res) => {
+      console.log(res);
+    });
+    navigate("/login");
+  };
 
   const http = axios.create({
     baseURL: "http://localhost:8000/api",
     headers: {
       "Content-type": "application/json",
-      "Authorization" : `Bearer ${token}`
+      Authorization: `Bearer ${token}`,
     },
   });
   return {
@@ -43,7 +50,8 @@ export default function AuthUser() {
     token,
     user,
     getToken,
+    getRole,
     http,
-    logout
+    logout,
   };
 }
