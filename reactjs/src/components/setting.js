@@ -20,7 +20,7 @@ function Setting() {
   let togleStatus = async (postId) => {
     console.log(postId);
     await http
-      .post("admin/changeStatus", { postId })
+      .put("admin/changeStatus", { id: postId })
       .then(({ res }) => console.log(res));
   };
 
