@@ -4,6 +4,7 @@ import { MDBDataTable } from "mdbreact";
 
 function Setting() {
   const { http } = AuthUser();
+  
 
   const [allUsers, setAllUsers] = useState([]);
   const [usersForRender, setUsersForRender] = useState([]);
@@ -19,9 +20,8 @@ function Setting() {
 
   let togleStatus = async (postId) => {
     console.log(postId);
-    await http
-      .put("admin/changeStatus", { id: postId })
-      .then(({ res }) => console.log(res));
+    await http.put("admin/changeStatus", { id: postId });
+    window.location.reload(false);
   };
 
   useEffect(() => {
