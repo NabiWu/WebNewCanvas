@@ -31,5 +31,5 @@ Route::group(['middleware'=>'api'], function(){
 });
 
 Route::get('admin/getAllUsers', [UserController::class, 'getAllUsers']);
-
+Route::post('admin/changeStatus', [UserController::class, 'changeStatus']);
 
