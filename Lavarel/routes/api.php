@@ -38,3 +38,6 @@ Route::put('admin/changeStatus', [UserController::class, 'changeStatus']);
 
 Route::post('admin/addCourse', [CourseController::class, 'addCourse']);
 Route::get('admin/getAllCourses', [CourseController::class, 'getAllCourses']);
+
+
+Route::get('teacher/getTeachingCourses', [CourseController::class, 'getTeachingCourses']);

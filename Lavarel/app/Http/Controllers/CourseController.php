@@ -16,7 +16,7 @@ class CourseController extends Controller
         return response()->json('success');
     }
 
-        public function getAllCourses()
+    public function getAllCourses()
     {
         return Course::all();
     }
