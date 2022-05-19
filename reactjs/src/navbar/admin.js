@@ -7,12 +7,13 @@ import Setting from "../components/setting";
 import AdminCourse from "../components/adminCourse";
 import AddCourse from "../components/addCourse";
 import AddStudent from "../components/addStudent";
+import ShowAnnouncements from "../components/showAnnouncements";
 
 function Admin() {
-  const {token, logout} = AuthUser();
+  const { token, logout } = AuthUser();
 
   const logoutUser = () => {
-    if (token !== undefined){
+    if (token !== undefined) {
       logout();
     }
   }
@@ -60,6 +61,10 @@ function Admin() {
           <Route
             path="/admin/courses/addStudentToCourse"
             element={<AddStudent />}
+          />
+          <Route
+            path="/courses/:id/announcements"
+            element={<ShowAnnouncements />}
           />
         </Routes>
       </div>
