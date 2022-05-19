@@ -4,6 +4,7 @@ import Home from "../components/home";
 import Dashboard from "../components/dashboard";
 import AuthUser from "../components/AuthUser";
 import TeacherCourse from "../components/teacherCourse";
+import AddAnouncement from "../components/addAnnouncement";
 
 function Teacher() {
   const {token, logout} = AuthUser();
@@ -47,6 +48,10 @@ function Teacher() {
           <Route path="/" element={<Home />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/teacher/courses" element={<TeacherCourse />} />
+          <Route
+            path="/teacher/courses/addAnouncement"
+            element={<AddAnouncement />}
+          />
         </Routes>
       </div>
     </>

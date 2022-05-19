@@ -17,6 +17,16 @@ class CourseController extends Controller
         return response()->json('success');
     }
 
+    public function addAnnouncement()
+    {
+        $credentials = request(['title', 'content', 'course_id']);
+        Announcement::create($credentials);
+
+        return response()->json('success');
+    }
+
+
+    
     public function getAllCourses()
     {
         return Course::all();
@@ -26,4 +36,11 @@ class CourseController extends Controller
     {
         return Announcement::where('course_id', $id)->get();
     }
+
+    public function getTeachingCourses($id)
+    {
+        return Course::where('teacher_id', $id)->get();
+    }
+
+
 }
