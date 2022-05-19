@@ -40,4 +40,10 @@ class CourseController extends Controller
                     ->get();
         return $students;
     }
+
+    public function addStudent($course_id, $student_id)
+    {
+        DB::table('takes')->insert([['course_id' => $course_id, 'student_id' => $student_id]]);
+        return response()->json('success');
+    }
 }

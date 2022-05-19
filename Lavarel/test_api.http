@@ -1,6 +1,9 @@
 # getAllStudentsByCourseId
 GET http://localhost:8000/api/course/1/getAllStudents HTTP/1.1
 
+# getAllStudentsByCourseId
+###
+GET http://localhost:8000/api/course/1/addStudent/1 HTTP/1.1
 
 ###
 # getAllCourses
