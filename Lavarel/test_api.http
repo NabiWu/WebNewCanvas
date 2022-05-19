@@ -16,7 +16,7 @@ Content-Type: application/json
     "name":"test Course", 
     "description":"haha", 
     "capacity": 10, 
-    "teacher_id": 1,
+    "teacher_id": 1
 }
 
 ###
