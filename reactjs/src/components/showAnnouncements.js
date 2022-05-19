@@ -10,7 +10,7 @@ function ShowAnnouncements() {
     const [anns, setAnns] = useState([]);
 
     let getAnn = async () => {
-        let data = await http.get(`/course/${id}/getAllAnnouncements`).then(({ data }) => data);
+        let data = await http.get(`/course/${id}/announcements`).then(({ data }) => data);
         setAnns(data);
     }
 

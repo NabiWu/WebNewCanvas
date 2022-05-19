@@ -36,7 +36,7 @@ function AdminCourse() {
       <br />
       <br />
       {allCourses.map((course) => {
-        let ann_url = `/courses/${course.id}/getAllAnnouncements`;
+        let ann_url = `/courses/${course.id}/announcements`;
         return (
           <div key={course.id}>
             <div className="card">

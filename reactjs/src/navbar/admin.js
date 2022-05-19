@@ -63,7 +63,7 @@ function Admin() {
             element={<AddStudent />}
           />
           <Route
-            path="/courses/:id/getAllAnnouncements"
+            path="/courses/:id/announcements"
             element={<ShowAnnouncements />}
           />
         </Routes>
