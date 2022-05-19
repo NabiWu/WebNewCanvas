@@ -26,7 +26,6 @@ class CourseController extends Controller
 
     public function getAllStudentsByCourseId($id) 
     {
-        echo($id);
         // $users = DB::table('users')
         //     ->join('contacts', 'users.id', '=', 'contacts.user_id')
         //     ->join('orders', 'users.id', '=', 'orders.user_id')
@@ -37,10 +36,11 @@ class CourseController extends Controller
         $students = DB::table('takes')
                     ->select('course_id', $id)
                     ->join("users","users.id","=","takes.student_id")
+                    ->select('role', 'name','email','student_id')
                     ->get();
         return $students;
     }
-
+    // TODO
     public function addStudent($course_id, $student_id)
     {
         DB::table('takes')->insert([['course_id' => $course_id, 'student_id' => $student_id]]);
