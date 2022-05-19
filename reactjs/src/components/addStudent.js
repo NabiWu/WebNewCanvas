@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import AuthUser from "./AuthUser";
+import {getAllStudents} from "./addCourse"
 
 function AddStudent() {
   const location = useLocation();
