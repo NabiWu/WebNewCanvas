@@ -9,7 +9,7 @@ function AddStudent() {
 
   return (
     <>
-      hello admin, please add stuend in it
+        
     </>
   );
 }

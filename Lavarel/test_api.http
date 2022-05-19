@@ -1,0 +1,29 @@
+
+GET  http://localhost:8000/api/teacher/11/getTeachingCourses HTTP/1.1
+Content-Type: application/json
+
+
+
+###
+POST http://localhost:8000/api/teacher/addAnnouncement HTTP/1.1
+Content-Type: application/json
+
+{
+    "title":"Test title", 
+    "content":"student should finished hw1 before next Monday", 
+    "course_id": 6
+}
+###
+POST http://localhost:8000/api/admin/addCourse HTTP/1.1
+Content-Type: application/json
+
+{
+    "name":"test Course", 
+    "description":"haha", 
+    "capacity": 10, 
+    "teacher_id": 1
+}
+
+###
+GET http://localhost:8000/api/course/1/announcements HTTP/1.1
+Content-Type: application/json

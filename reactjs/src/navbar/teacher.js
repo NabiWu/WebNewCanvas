@@ -3,17 +3,14 @@ import { Routes, Route, Link } from "react-router-dom";
 import Home from "../components/home";
 import Dashboard from "../components/dashboard";
 import AuthUser from "../components/AuthUser";
-import Setting from "../components/setting";
-import AdminCourse from "../components/adminCourse";
-import AddCourse from "../components/addCourse";
-import AddStudent from "../components/addStudent";
-import ShowAnnouncements from "../components/showAnnouncements";
+import TeacherCourse from "../components/teacherCourse";
+import AddAnouncement from "../components/addAnnouncement";
 
-function Admin() {
-  const { token, logout } = AuthUser();
+function Teacher() {
+  const {token, logout} = AuthUser();
 
   const logoutUser = () => {
-    if (token !== undefined) {
+    if (token !== undefined){
       logout();
     }
   }
@@ -35,12 +32,7 @@ function Admin() {
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" to="/setting">
-              Setting
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="/admin/courses">
+            <Link className="nav-link" to="/teacher/courses">
               Courses
             </Link>
           </li>
@@ -55,16 +47,10 @@ function Admin() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/setting" element={<Setting />} />
-          <Route path="/admin/courses" element={<AdminCourse />} />
-          <Route path="/admin/courses/addCourse" element={<AddCourse />} />
+          <Route path="/teacher/courses" element={<TeacherCourse />} />
           <Route
-            path="/admin/courses/addStudentToCourse"
-            element={<AddStudent />}
-          />
-          <Route
-            path="/courses/:id/announcements"
-            element={<ShowAnnouncements />}
+            path="/teacher/courses/addAnouncement"
+            element={<AddAnouncement />}
           />
         </Routes>
       </div>
@@ -72,4 +58,4 @@ function Admin() {
   );
 }
 
-export default Admin;
+export default Teacher;

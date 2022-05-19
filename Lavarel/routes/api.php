@@ -37,4 +37,9 @@ Route::get('admin/getAllTeachers', [UserController::class, 'getAllTeachers']);
 Route::put('admin/changeStatus', [UserController::class, 'changeStatus']);
 
 Route::post('admin/addCourse', [CourseController::class, 'addCourse']);
+Route::post('teacher/addAnnouncement', [CourseController::class, 'addAnnouncement']);
 Route::get('admin/getAllCourses', [CourseController::class, 'getAllCourses']);
+
+
+Route::get('teacher/{id}/getTeachingCourses', [CourseController::class, 'getTeachingCourses']);
+Route::get('/course/{id}/announcements', [CourseController::class, 'getAllAnnouncements']);

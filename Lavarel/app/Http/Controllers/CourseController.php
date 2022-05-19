@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Course;
+use App\Models\announcement;
 
 class CourseController extends Controller
 {
@@ -16,8 +17,30 @@ class CourseController extends Controller
         return response()->json('success');
     }
 
-        public function getAllCourses()
+    public function addAnnouncement()
+    {
+        $credentials = request(['title', 'content', 'course_id']);
+        Announcement::create($credentials);
+
+        return response()->json('success');
+    }
+
+
+    
+    public function getAllCourses()
     {
         return Course::all();
     }
+
+    public function getAllAnnouncements($id)
+    {
+        return Announcement::where('course_id', $id)->get();
+    }
+
+    public function getTeachingCourses($id)
+    {
+        return Course::where('teacher_id', $id)->get();
+    }
+
+
 }

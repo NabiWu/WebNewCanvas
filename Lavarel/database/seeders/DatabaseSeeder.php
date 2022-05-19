@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-
+use App\Models\User;
+use App\Models\announcement;
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -16,9 +16,36 @@ class DatabaseSeeder extends Seeder
     {
         //  \App\Models\User::factory(2)->create();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        User::create([
+            'name' => 'admin',
+            'password'=> bcrypt('password'),
+            'email' => 'admin@admin.com',
+            'role' => 'admin',
+            'isActive' => True,
+        ]);
+        User::create([
+            'name' => 'teacher1',
+            'password'=> bcrypt('password'),
+            'email' => 'teacher1@gmail.com',
+            'role' => 'teacher',
+            'isActive' => True,
+        ]);
+        User::create([
+            'name' => 'student1',
+            'password'=> bcrypt('password'),
+            'email' => 'student1@gmail.com',
+            'role' => 'student',
+            'isActive' => True,
+        ]);
+
+        announcement::create([
+            'title' => 'ann1',
+            'content' => 'blabla',
+            'course_id' => 1,
+        ]);
+
+        
+
+
     }
 }
