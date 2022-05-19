@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\User;
+use App\Models\announcement;
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -36,5 +37,15 @@ class DatabaseSeeder extends Seeder
             'role' => 'student',
             'isActive' => True,
         ]);
+
+        announcement::create([
+            'title' => 'ann1',
+            'content' => 'blabla',
+            'course_id' => 1,
+        ]);
+
+        
+
+
     }
 }
