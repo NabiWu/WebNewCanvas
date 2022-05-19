@@ -16,7 +16,6 @@ function Teacher() {
   }
 
 
-
   return (
     <>
       <nav className="navbar navbar-expand-sm navbar-dark bg-dark">

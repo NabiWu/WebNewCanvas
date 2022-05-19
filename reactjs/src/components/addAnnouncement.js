@@ -12,7 +12,7 @@ function AddAnouncement() {
 
   const submitForm = () => {
     http
-      .post("teacher/addAnnouncement", {
+      .post("/course/announcements", {
         title: title,
         content: content,
         course_id: location.state.courseID,
