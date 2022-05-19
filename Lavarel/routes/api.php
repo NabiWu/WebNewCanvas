@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CourseController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -31,5 +32,9 @@ Route::group(['middleware'=>'api'], function(){
 });
 
 Route::get('admin/getAllUsers', [UserController::class, 'getAllUsers']);
+Route::get('admin/getAllStudents', [UserController::class, 'getAllStudents']);
+Route::get('admin/getAllTeachers', [UserController::class, 'getAllTeachers']);
 Route::put('admin/changeStatus', [UserController::class, 'changeStatus']);
 
+Route::post('admin/addCourse', [CourseController::class, 'addCourse']);
+Route::get('admin/getAllCourses', [CourseController::class, 'getAllCourses']);
