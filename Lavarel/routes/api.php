@@ -41,3 +41,4 @@ Route::get('admin/getAllCourses', [CourseController::class, 'getAllCourses']);
 
 
 Route::get('teacher/getTeachingCourses', [CourseController::class, 'getTeachingCourses']);
+Route::get('/course/{id}/getAllAnnouncements', [CourseController::class, 'getAllAnnouncements']);
