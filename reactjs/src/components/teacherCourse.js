@@ -17,7 +17,7 @@ function TeacherCourse() {
   };
   return (
     <>
-      
+      hello Teacher, here are all courses you are teaching
     </>
   );
 }
