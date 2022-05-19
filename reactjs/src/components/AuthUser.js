@@ -17,6 +17,9 @@ export default function AuthUser() {
   const getRole = () => {
     return getUser().role;
   };
+
+
+
   const [token, setToken] = useState(getToken());
   const [user, setUser] = useState(getUser());
 

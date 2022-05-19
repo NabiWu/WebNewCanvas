@@ -4,11 +4,15 @@ import Home from "../components/home";
 import Dashboard from "../components/dashboard";
 import AuthUser from "../components/AuthUser";
 import Setting from "../components/setting";
+import AdminCourse from "../components/adminCourse";
+import AddCourse from "../components/addCourse";
+import AddStudent from "../components/addStudent";
 
 function Admin() {
   const {token, logout} = AuthUser();
+
   const logoutUser = () => {
-    if (token != undefined){
+    if (token !== undefined){
       logout();
     }
   }
@@ -34,7 +38,7 @@ function Admin() {
               Setting
             </Link>
           </li>
-          <li>
+          <li className="nav-item">
             <Link className="nav-link" to="/admin/courses">
               Courses
             </Link>
@@ -51,8 +55,12 @@ function Admin() {
           <Route path="/" element={<Home />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/setting" element={<Setting />} />
-
-          {/* <Route path="/admin/courses" element={<AdminCourse/>}/> */}
+          <Route path="/admin/courses" element={<AdminCourse />} />
+          <Route path="/admin/courses/addCourse" element={<AddCourse />} />
+          <Route
+            path="/admin/courses/addStudentToCourse"
+            element={<AddStudent />}
+          />
         </Routes>
       </div>
     </>
