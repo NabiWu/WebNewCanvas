@@ -37,6 +37,20 @@ class DatabaseSeeder extends Seeder
             'role' => 'student',
             'isActive' => FALSE,
         ]);
+        User::create([
+            'name' => 'student2',
+            'password'=> bcrypt('password'),
+            'email' => 'student2@gmail.com',
+            'role' => 'student',
+            'isActive' => FALSE,
+        ]);
+        User::create([
+            'name' => 'student3',
+            'password'=> bcrypt('password'),
+            'email' => 'student3@gmail.com',
+            'role' => 'student',
+            'isActive' => FALSE,
+        ]);
 
         announcement::create([
             'title' => 'ann1',

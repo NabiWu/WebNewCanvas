@@ -24,7 +24,7 @@ function AddStudent() {
 
   useEffect(() => {
     getAllStudents();
-    getEnrolledStudents(location.state.id);
+    getEnrolledStudents(location.state.courseID);
   }, []);
 
 
@@ -40,12 +40,15 @@ function AddStudent() {
   const submitForm = () => {
     const studentInfo = addedStudent.split(" ");
     let studentId = studentInfo[1];
-
     http
-      .get("course/" + location.state.id +"/addStudent/" +studentId)
+      .post("course/" + location.state.courseID +"/addStudent/" +studentId)
       .then((res) => {
-        console.log(res)
-        window.location.reload(false);
+        if (res.data === "fail") {
+          console.log(res)
+          alert("cannot add course,reach capacity!")
+        }else{
+          window.location.reload(false);
+        }
       });
   };
 
@@ -79,7 +82,6 @@ function AddStudent() {
 
     rows: enrolledStudents,
   };
-  console.log(allStudents)
 
   return (
     

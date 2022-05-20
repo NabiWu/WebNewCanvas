@@ -40,16 +40,10 @@ class CourseController extends Controller
     }
     public function getAllStudentsByCourseId($id) 
     {
-        // $users = DB::table('users')
-        //     ->join('contacts', 'users.id', '=', 'contacts.user_id')
-        //     ->join('orders', 'users.id', '=', 'orders.user_id')
-        //     ->select('users.*', 'contacts.phone', 'orders.price')
-        //     ->get();
-        // $students = take::where('course_id', $id)::join("users","users.id","=","take.student_id")->get();
-
+        
         $students = DB::table('takes')
-                    ->select('course_id', $id)
                     ->join("users","users.id","=","takes.student_id")
+                    ->where('course_id', $id)
                     ->select('role', 'name','email','student_id')
                     ->get();
         return $students;
@@ -57,8 +51,14 @@ class CourseController extends Controller
     // TODO
     public function addStudent($course_id, $student_id)
     {
-        DB::table('takes')->insert([['course_id' => $course_id, 'student_id' => $student_id]]);
-        return response()->json('success');
+        $size = $this->getCourseSize($course_id);
+        $capacity = $this->getCourseCapacity($course_id);
+        if ($capacity <= $size) {
+            return response()->json('fail');
+        } else {
+            DB::table('takes')->insert([['course_id' => $course_id, 'student_id' => $student_id]]);
+            return response()->json('success');
+        }  
     }
 
 
@@ -67,5 +67,23 @@ class CourseController extends Controller
     public function getTeachingCourses($id)
     {
         return Course::where('teacher_id', $id)->get();
+    }
+
+    private function getCourseSize($id)
+    {
+        $size = DB::table('takes')
+                    ->where('course_id', $id)
+                    ->join("users","users.id","=","takes.student_id")
+                    ->count();
+        return $size;
+    }
+
+    private function getCourseCapacity($id)
+    {
+        $capacity = DB::table('courses')
+                    ->where('id', $id)
+                    ->select('capacity')
+                    ->get();
+        return $capacity[0]->capacity;
     }
 }
