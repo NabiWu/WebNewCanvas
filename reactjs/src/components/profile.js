@@ -15,7 +15,7 @@ export default function Profile() {
     setNewName(userdetail.name);
     setNewEmail(userdetail.email);
     setShow(true);
-  }
+  };
 
   useEffect(() => {
     fetchUserDetail();
@@ -27,11 +27,14 @@ export default function Profile() {
     });
   };
 
-  const updateInfo = () => {
-
-    console.log(newName);
-    console.log(newEmail);
+  const updateInfo = async () => {
+    await http.put("/profile", {
+      id: userdetail.id,
+      name: newName,
+      email: newEmail,
+    });
     setShow(false);
+    window.location.reload(false);
   };
 
   const editChange = () => {};

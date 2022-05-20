@@ -37,5 +37,17 @@ class UserController extends Controller
         return response()->json(['message'=>'Status changed'], 200);
     }
 
+    
+
+    public function updateProfile()
+    {
+        $user = User::find(request('id'));
+        $user->name = request('name');
+        $user->email = request('email');
+        $user->save();
+
+        return response()->json(['message'=>'Status changed'], 200);
+    }
+
 
 }

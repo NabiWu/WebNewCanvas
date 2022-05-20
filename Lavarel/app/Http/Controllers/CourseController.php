@@ -23,6 +23,7 @@ class CourseController extends Controller
     public function addAnnouncement()
     {
         $credentials = request(['title', 'content', 'course_id']);
+        
         Announcement::create($credentials);
 
         return response()->json('success');

@@ -69,9 +69,9 @@ Content-Type: application/json
 
 {
     "course_id" : 6,
-    "title": "assign1",
+    "title": "assign2",
     "description": "des",
-    "due_date": "Mon May 23 2022 00:00:00 GMT-0500 (Central Daylight Time)",
+    "due_date": "06/10/2022",
     "max_points": 100
 }
 
@@ -83,3 +83,13 @@ Content-Type: application/json
 ###get a student's all courses
 GET http://localhost:8000/api/student/6/courses HTTP/1.1
 Content-Type: application/json
+
+###
+PUT http://localhost:8000/api/profile HTTP/1.1
+Content-Type: application/json
+
+{
+    "id" : 11,
+    "name": "Gary",
+    "email": "Teacher@Teacher.com"
+}

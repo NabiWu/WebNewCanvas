@@ -11,7 +11,7 @@ class AssignmentController extends Controller
     {
         $credentials = request(['title', 'description', 'due_date', 'max_points', 'course_id']);
         Assignment::create($credentials);
-
+        print_r($credentials);
         return response()->json('success');
     }
 
