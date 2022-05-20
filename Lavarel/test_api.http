@@ -27,3 +27,22 @@ Content-Type: application/json
 ###
 GET http://localhost:8000/api/course/1/announcements HTTP/1.1
 Content-Type: application/json
+
+
+###
+GET http://localhost:8000/api/course/6/assignments HTTP/1.1
+Content-Type: application/json
+
+
+###
+#add assignment
+POST http://localhost:8000/api/course/assignments HTTP/1.1
+Content-Type: application/json
+
+{
+    "course_id" : 6,
+    "title": "assign1",
+    "description": "des",
+    "due_date": "5/19/2022",
+    "max_points": 100
+}
