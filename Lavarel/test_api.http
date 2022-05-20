@@ -74,3 +74,12 @@ Content-Type: application/json
     "due_date": "Mon May 23 2022 00:00:00 GMT-0500 (Central Daylight Time)",
     "max_points": 100
 }
+
+
+###get a student's all announcements
+GET http://localhost:8000/api/student/6/announcements HTTP/1.1
+Content-Type: application/json
+
+###get a student's all courses
+GET http://localhost:8000/api/student/6/courses HTTP/1.1
+Content-Type: application/json

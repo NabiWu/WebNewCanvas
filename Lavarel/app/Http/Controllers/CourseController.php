@@ -38,14 +38,38 @@ class CourseController extends Controller
     {
         return Announcement::where('course_id', $id)->get();
     }
-    public function getAllStudentsByCourseId($id) 
+
+    //for students, get Announcements for all taken courses
+    public function getAllMyAnnouncements($id)
     {
-        
+        $annsData = DB::select('select courses.name as courseName, title, content, anns.created_at as created_at
+        from announcements as anns join courses on anns.course_id=courses.id
+        where anns.course_id in (
+                select course_id
+                from users
+                    join takes on users.id = takes.student_id
+                where users.id = ?
+        )', [$id]);
+        return $annsData;
+    }
+
+    //for a student, get all taken courses
+    public function getAllMyCourses($id)
+    {
+        $courses = DB::select('select courses.id, courses.name 
+        from takes join courses on takes.course_id=courses.id 
+        where takes.student_id = ?', [$id]);
+        return $courses;
+    }
+
+    public function getAllStudentsByCourseId($id)
+    {
+
         $students = DB::table('takes')
-                    ->join("users","users.id","=","takes.student_id")
-                    ->where('course_id', $id)
-                    ->select('role', 'name','email','student_id')
-                    ->get();
+            ->join("users", "users.id", "=", "takes.student_id")
+            ->where('course_id', $id)
+            ->select('role', 'name', 'email', 'student_id')
+            ->get();
         return $students;
     }
     // TODO
@@ -58,7 +82,7 @@ class CourseController extends Controller
         } else {
             DB::table('takes')->insert([['course_id' => $course_id, 'student_id' => $student_id]]);
             return response()->json('success');
-        }  
+        }
     }
 
 
@@ -72,18 +96,18 @@ class CourseController extends Controller
     private function getCourseSize($id)
     {
         $size = DB::table('takes')
-                    ->where('course_id', $id)
-                    ->join("users","users.id","=","takes.student_id")
-                    ->count();
+            ->where('course_id', $id)
+            ->join("users", "users.id", "=", "takes.student_id")
+            ->count();
         return $size;
     }
 
     private function getCourseCapacity($id)
     {
         $capacity = DB::table('courses')
-                    ->where('id', $id)
-                    ->select('capacity')
-                    ->get();
+            ->where('id', $id)
+            ->select('capacity')
+            ->get();
         return $capacity[0]->capacity;
     }
 }

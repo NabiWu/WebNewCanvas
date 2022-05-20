@@ -1,0 +1,11 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "name": "sql_test",
+            "database": "D:\\master\\web\\WebNewCanvas\\Lavarel\\web.sqlite"
+        }
+    ],
+    "sqltools.useNodeRuntime": true
+}
