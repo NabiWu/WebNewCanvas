@@ -1,19 +1,18 @@
 
 import { Routes, Route, Link } from "react-router-dom";
 import Home from "../components/home";
+import Profile from "../components/profile";
 import Dashboard from "../components/dashboard";
 import AuthUser from "../components/AuthUser";
 
 function Auth() {
   const {token, logout} = AuthUser();
   const logoutUser = () => {
-    if (token != undefined){
+    if (token !== undefined){
       logout();
 
     }
   }
-
-
 
   return (
     <>
@@ -22,6 +21,11 @@ function Auth() {
           <li className="nav-item">
             <Link className="nav-link" to="/">
               Home
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link" to="/profile">
+              Profile
             </Link>
           </li>
           <li className="nav-item">
@@ -39,6 +43,7 @@ function Auth() {
       <div className="container">
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/profile" element={<Profile />} />
           <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
       </div>

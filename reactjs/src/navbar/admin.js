@@ -1,6 +1,7 @@
 
 import { Routes, Route, Link } from "react-router-dom";
 import Home from "../components/home";
+import Profile from "../components/profile";
 import Dashboard from "../components/dashboard";
 import AuthUser from "../components/AuthUser";
 import Setting from "../components/setting";
@@ -30,6 +31,11 @@ function Admin() {
             </Link>
           </li>
           <li className="nav-item">
+            <Link className="nav-link" to="/profile">
+              Profile
+            </Link>
+          </li>
+          <li className="nav-item">
             <Link className="nav-link" to="/dashboard">
               Dashboard
             </Link>
@@ -54,6 +60,7 @@ function Admin() {
       <div className="container">
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/profile" element={<Profile />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/setting" element={<Setting />} />
           <Route path="/admin/courses" element={<AdminCourse />} />

@@ -52,6 +52,19 @@ function TeacherCourse() {
                 >
                   Add Announcement
                 </Link>
+                <Link
+                  to="/teacher/courses/addAssignment"
+                  className="btn btn-primary"
+                  state={{
+                    courseID: course.id,
+                    courseName: course.name,
+                    courseDescription: course.description,
+                    courseCapacity: course.capacity,
+                    courseTeacher: course.teacher_id,
+                  }}
+                >
+                  Add Assignment
+                </Link>
               </div>
             </div>
             <br></br>
