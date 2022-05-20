@@ -45,4 +45,8 @@ Route::get('teacher/{id}/getTeachingCourses', [CourseController::class, 'getTeac
 
 
 Route::post('/course/announcements', [CourseController::class, 'addAnnouncement']);
-Route::get('/course/{id}/announcements', [CourseController::class, 'getAllAnnouncements']);
+Route::get('/course/{id}/announcements', [CourseController::class, 'getAnnouncements']);
+
+
+Route::post('/course/assignments', [CourseController::class, 'addAssignment']);
+Route::get('/course/{id}/assignments', [CourseController::class, 'getAssignments']);

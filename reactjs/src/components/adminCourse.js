@@ -37,6 +37,7 @@ function AdminCourse() {
       <br />
       {allCourses.map((course) => {
         let ann_url = `/courses/${course.id}/announcements`;
+        let assign_url = `/courses/${course.id}/assignments`;
         return (
           <div key={course.id}>
             <div className="card">
@@ -69,6 +70,19 @@ function AdminCourse() {
                   }}
                 >
                   See all announcement
+                </Link>
+                <Link
+                  to={assign_url}
+                  className="btn btn-primary"
+                  state={{
+                    courseID: course.id,
+                    courseName: course.name,
+                    courseDescription: course.description,
+                    courseCapacity: course.capacity,
+                    courseTeacher: course.teacher_id
+                  }}
+                >
+                  See all assignments
                 </Link>
               </div>
             </div>
