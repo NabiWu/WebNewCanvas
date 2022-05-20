@@ -26,13 +26,6 @@ class CourseController extends Controller
         return response()->json('success');
     }
 
-    public function addAssignment()
-    {
-        $credentials = request(['title', 'description', 'due_date', 'max_points', 'course_id']);
-        Assignment::create($credentials);
-
-        return response()->json('success');
-    }
 
 
     public function getAllCourses()
@@ -46,10 +39,7 @@ class CourseController extends Controller
     }
 
 
-    public function getAssignments($id)
-    {
-        return Assignment::where('course_id', $id)->get();
-    }
+
 
     public function getTeachingCourses($id)
     {

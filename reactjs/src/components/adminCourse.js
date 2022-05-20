@@ -35,7 +35,7 @@ function AdminCourse() {
       <br />
       <br />
       <br />
-      {allCourses.map((course, idx) => {
+      {allCourses.map((course, idx) => {  
         let ann_url = `/courses/${course.id}/announcements`;
         let assign_url = `/courses/${course.id}/assignments`;
         let card_header = `course ${idx + 1}`

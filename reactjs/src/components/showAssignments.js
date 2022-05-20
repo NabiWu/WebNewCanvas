@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import AuthUser from "./AuthUser";
 
 function ShowAssignments() {
@@ -30,9 +30,11 @@ function ShowAssignments() {
             return (
                 <div key={assign.id}>
                     <div className="card">
-                        <div className="card-header">assignments {idx + 1}</div>
+                        <div className="card-header"> assignments {idx + 1}</div>
                         <div className="card-body">
-                            <h3 className="card-title">{assign.title}</h3>
+                            <Link to="/course/assignment">
+                                <h3 className="card-title">{assign.title}</h3>
+                            </Link>
                             <pre className="card-text">{assign.description}</pre>
                             <p className="card-text">points: {assign.max_points} <b> || due date: {assign.due_date}</b></p>
                         </div>
