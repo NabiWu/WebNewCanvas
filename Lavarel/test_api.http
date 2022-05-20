@@ -71,7 +71,7 @@ Content-Type: application/json
     "course_id" : 6,
     "title": "assign1",
     "description": "des",
-    "due_date": "5/19/2022",
+    "due_date": "Mon May 23 2022 00:00:00 GMT-0500 (Central Daylight Time)",
     "max_points": 100
 }
 

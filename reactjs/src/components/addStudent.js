@@ -45,7 +45,7 @@ function AddStudent() {
       .then((res) => {
         if (res.data === "fail") {
           console.log(res)
-          alert("cannot add student, reach capacity!")
+          alert("Cannot add student, reach capacity!")
         }else{
           window.location.reload(false);
         }

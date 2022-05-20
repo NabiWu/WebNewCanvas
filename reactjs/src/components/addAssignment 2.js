@@ -17,20 +17,11 @@ function AddAssignment() {
   const submitForm = () => {
     http
       .post("/course/assignments", {
-        title: title,
-        description: description,
-        due_date: dueDate.toLocaleDateString(),
-        max_points: maxPoint,
         course_id: location.state.courseID,
       })
       .then((res) => {
         navigate("/teacher/courses");
       });
-    console.log(title);
-    console.log(description);
-    console.log(dueDate.toLocaleDateString());
-    console.log(maxPoint);
-    console.log(location.state.courseID);
   };
 
   return (
