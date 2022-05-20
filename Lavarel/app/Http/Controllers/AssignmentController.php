@@ -20,4 +20,11 @@ class AssignmentController extends Controller
     {
         return Assignment::where('course_id', $id)->get();
     }
+
+
+
+    public function getAllMyAssignments($id)
+    {
+
+    }
 }
