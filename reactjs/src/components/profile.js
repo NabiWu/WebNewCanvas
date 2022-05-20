@@ -1,10 +1,21 @@
 import { useEffect, useState } from "react";
-import { Card, Button } from "react-bootstrap";
+import { Card, Button, Modal, Form } from "react-bootstrap";
 import AuthUser from "./AuthUser";
 
 export default function Profile() {
   const { http } = AuthUser();
   const [userdetail, setUserdetail] = useState("");
+  const [show, setShow] = useState(false);
+
+  const [newName, setNewName] = useState();
+  const [newEmail, setNewEmail] = useState();
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => {
+    setNewName(userdetail.name);
+    setNewEmail(userdetail.email);
+    setShow(true);
+  }
 
   useEffect(() => {
     fetchUserDetail();
@@ -16,9 +27,14 @@ export default function Profile() {
     });
   };
 
-  const editChange = () => {
-    console.log('haha')
+  const updateInfo = () => {
+
+    console.log(newName);
+    console.log(newEmail);
+    setShow(false);
   };
+
+  const editChange = () => {};
 
   function renderElement() {
     if (userdetail) {
@@ -27,16 +43,7 @@ export default function Profile() {
       } else {
         return (
           <>
-            <div>
-              <h4>Name</h4>
-              <p>{userdetail.name}</p>
-              <h4>Email</h4>
-              <p>{userdetail.email}</p>
-              <h4>Role</h4>
-              <p>{userdetail.role}</p>
-              <h4>Role</h4>
-              <p>{userdetail.id}</p>
-            </div>
+            <br />
             <Card>
               <Card.Header>My Information</Card.Header>
               <Card.Body>
@@ -44,16 +51,61 @@ export default function Profile() {
                 <Card.Text>Email: {userdetail.email}</Card.Text>
                 <Card.Text>Role: {userdetail.role}</Card.Text>
                 <Card.Text>ID: {userdetail.id}</Card.Text>
-                <Button variant="primary" onClick={editChange}>Go somewhere</Button>
+                <Button variant="primary" onClick={handleShow}>
+                  Edit Your Profile
+                </Button>
               </Card.Body>
             </Card>
+            <Modal show={show} onHide={handleClose}>
+              <Modal.Header closeButton>
+                <Modal.Title>Edit Your Profile:</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <Form>
+                  <Form.Group
+                    className="mb-3"
+                    controlId="exampleForm.ControlInput1"
+                  >
+                    <Form.Label>Name</Form.Label>
+                    <Form.Control
+                      type="text"
+                      defaultValue={userdetail.name}
+                      onChange={(e) => setNewName(e.target.value)}
+                      autoFocus
+                    />
+                  </Form.Group>
+                  <Form.Group
+                    className="mb-3"
+                    controlId="exampleForm.ControlInput1"
+                  >
+                    <Form.Label>Email address</Form.Label>
+                    <Form.Control
+                      type="email"
+                      defaultValue={userdetail.email}
+                      onChange={(e) => setNewEmail(e.target.value)}
+                      autoFocus
+                    />
+                  </Form.Group>
+                </Form>
+              </Modal.Body>
+              <Modal.Footer>
+                <Button variant="secondary" onClick={handleClose}>
+                  Close
+                </Button>
+                <Button variant="primary" onClick={updateInfo}>
+                  Save Changes
+                </Button>
+              </Modal.Footer>
+            </Modal>
           </>
         );
       }
     } else {
-      return <div className="spinner-border" role="status">
-        <span className="sr-only">Loading...</span>
-      </div>;
+      return (
+        <div className="spinner-border" role="status">
+          <span className="sr-only">Loading...</span>
+        </div>
+      );
     }
   }
 
