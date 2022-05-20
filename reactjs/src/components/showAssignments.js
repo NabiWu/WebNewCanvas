@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import AuthUser from "./AuthUser";
 
@@ -8,12 +8,13 @@ function ShowAssignments() {
 
     let id = location.state['courseID'];
     const [assigns, setAnns] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     let getAssign = async () => {
         let data = await http.get(`/course/${id}/assignments`).then(({ data }) => data);
         setAnns(data);
+        setLoading(false);
     }
-
     useEffect(
         () => {
             getAssign();
@@ -21,6 +22,8 @@ function ShowAssignments() {
         , []
     )
     let assign_cards;
+    console.log(assigns.length)
+
     if (assigns.length === 0) {
         assign_cards = <>
             <div>Cong! No assignments so far!</div>
@@ -46,11 +49,18 @@ function ShowAssignments() {
     }
 
     return (
-        <>
+        <React.Fragment>
             <h2>Assignments of {location.state['courseName']}</h2>
             <hr></hr>
-            {assign_cards}
-        </>
+            {loading ? <div className="spinner-border" role="status">
+                <span className="sr-only">Loading...</span>
+            </div> :
+                <div>
+                    {assign_cards}
+                </div>
+
+            }
+        </React.Fragment>
     );
 }
 

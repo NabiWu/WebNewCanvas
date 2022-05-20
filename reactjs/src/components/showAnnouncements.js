@@ -8,10 +8,13 @@ function ShowAnnouncements() {
 
     let id = location.state['courseID'];
     const [anns, setAnns] = useState([]);
+    const [loading, setLoading] = useState(true);
+
 
     let getAnn = async () => {
         let data = await http.get(`/course/${id}/announcements`).then(({ data }) => data);
         setAnns(data);
+        setLoading(false);
     }
 
     useEffect(
@@ -46,7 +49,14 @@ function ShowAnnouncements() {
         <>
             <h2>Announcements of {location.state['courseName']}</h2>
             <hr></hr>
-            {anns_cards}
+            {loading ? <div className="spinner-border" role="status">
+                <span className="sr-only">Loading...</span>
+            </div> :
+                <div>
+                    {anns_cards}
+                </div>
+
+            }
         </>
     );
 }
