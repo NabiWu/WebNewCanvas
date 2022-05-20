@@ -19,4 +19,11 @@
 -- )
 
 
-select courses.id, courses.name from takes join courses on takes.course_id=courses.id where takes.student_id = 6
+-- select courses.id, courses.name from takes join courses on takes.course_id=courses.id where takes.student_id = 6
+
+
+-- get grades of an assignment
+INSERT into assignments()
+
+select * from submissions;
+-- INSERT INTO submissions (student_id, course_id, assignment_id)

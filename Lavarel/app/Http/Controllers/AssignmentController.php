@@ -23,8 +23,12 @@ class AssignmentController extends Controller
 
 
 
-    public function getAllMyAssignments($id)
-    {
+    // public function getAllMyAssignments($id)
+    // {
+
+    // }
+
+    public function getAssignmentGrades($id){
 
     }
 }
