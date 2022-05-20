@@ -20,25 +20,33 @@ function ShowAnnouncements() {
         }
         , []
     )
-
+    let anns_cards;
+    if (anns.length === 0) {
+        anns_cards = <>
+            <div>No announcements!</div>
+        </>
+    } else {
+        anns_cards = anns.map((ann, idx) => {
+            return (
+                <div key={ann.id}>
+                    <div className="card">
+                        <div className="card-header">Announcement {idx + 1}</div>
+                        <div className="card-body">
+                            <h5 className="card-title">{ann.title}</h5>
+                            <p className="card-text">{ann.content}</p>
+                        </div>
+                    </div>
+                    <br></br>
+                </div>
+            );
+        });
+    }
 
     return (
         <>
-            <div>Show Announcements</div>
-            {anns.map((ann) => {
-                return (
-                    <div key={ann.id}>
-                        <div className="card">
-                            <div className="card-header">Announcement</div>
-                            <div className="card-body">
-                                <h5 className="card-title">{ann.title}</h5>
-                                <p className="card-text">{ann.content}</p>
-                            </div>
-                        </div>
-                        <br></br>
-                    </div>
-                );
-            })}
+            <h2>Announcements of {location.state['courseName']}</h2>
+            <hr></hr>
+            {anns_cards}
         </>
     );
 }
