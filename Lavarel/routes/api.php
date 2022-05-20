@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\AssignmentController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -42,3 +43,14 @@ Route::get('admin/getAllCourses', [CourseController::class, 'getAllCourses']);
 Route::get('course/{id}/getAllAnnouncements', [CourseController::class, 'getAllAnnouncements']);
 Route::get('course/{id}/getAllStudents', [CourseController::class, 'getAllStudentsByCourseId']);
 Route::get('course/{course_id}/addStudent/{student_id}', [CourseController::class, 'addStudent']);
+// Route::post('teacher/addAnnouncement', [CourseController::class, 'addAnnouncement']);
+
+Route::get('teacher/{id}/getTeachingCourses', [CourseController::class, 'getTeachingCourses']);
+
+
+Route::post('/course/announcements', [CourseController::class, 'addAnnouncement']);
+Route::get('/course/{id}/announcements', [CourseController::class, 'getAnnouncements']);
+
+
+Route::post('/course/assignments', [AssignmentController::class, 'addAssignment']);
+Route::get('/course/{id}/assignments', [AssignmentController::class, 'getAssignments']);

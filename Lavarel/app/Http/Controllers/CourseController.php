@@ -7,6 +7,7 @@ use App\Models\Course;
 use App\Models\take;
 use App\Models\announcement;
 use Illuminate\Support\Facades\DB;
+use App\Models\assignment;
 
 class CourseController extends Controller
 {
@@ -19,11 +20,24 @@ class CourseController extends Controller
         return response()->json('success');
     }
 
+    public function addAnnouncement()
+    {
+        $credentials = request(['title', 'content', 'course_id']);
+        Announcement::create($credentials);
+
+        return response()->json('success');
+    }
+
+
+
     public function getAllCourses()
     {
         return Course::all();
     }
-
+    public function getAnnouncements($id)
+    {
+        return Announcement::where('course_id', $id)->get();
+    }
     public function getAllStudentsByCourseId($id) 
     {
         // $users = DB::table('users')
@@ -45,5 +59,13 @@ class CourseController extends Controller
     {
         DB::table('takes')->insert([['course_id' => $course_id, 'student_id' => $student_id]]);
         return response()->json('success');
+    }
+
+
+
+
+    public function getTeachingCourses($id)
+    {
+        return Course::where('teacher_id', $id)->get();
     }
 }
