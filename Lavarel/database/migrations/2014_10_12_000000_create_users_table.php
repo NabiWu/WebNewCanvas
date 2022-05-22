@@ -20,6 +20,12 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->boolean('isActive');
             $table->timestamp('email_verified_at')->nullable();
+            $table->string('ques1')->nullable();
+            $table->string('ans1')->nullable();
+            $table->string('ques2')->nullable();
+            $table->string('ans2')->nullable();
+            $table->string('ques3')->nullable();
+            $table->string('ans3')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
