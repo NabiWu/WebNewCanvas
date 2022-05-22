@@ -55,5 +55,14 @@ class UserController extends Controller
         return response()->json(['message'=>'Status changed'], 200);
     }
 
+        public function updatePassword()
+    {
+        $user = User::find(request('id'));
+        $user->password = bcrypt(request('password'));
+        $user->save();
+
+        return response()->json(['message'=>'Status changed'], 200);
+    }
+
 
 }

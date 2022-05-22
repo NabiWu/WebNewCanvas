@@ -112,4 +112,22 @@ Content-Type: application/json
     "ans3": "good"
 
 }
-        
+
+###
+PUT http://localhost:8000/api/profile HTTP/1.1
+Content-Type: application/json
+
+{
+    "email": "testSec@test.com",
+    "password": "password",
+    "name": "testSec",
+    "role": "student",
+    "isActive": "false",
+    "ques1": "what is cool?",
+    "ans1": "cool",
+    "ques2": "what is not cool?",
+    "ans2": "not cool",
+    "ques3": "what is not good?",
+    "ans3": "good"
+
+}
