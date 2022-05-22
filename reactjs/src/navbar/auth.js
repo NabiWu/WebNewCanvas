@@ -5,6 +5,7 @@ import Profile from "../components/profile";
 import Dashboard from "../components/dashboard";
 import AuthUser from "../components/AuthUser";
 
+
 function Auth() {
   const {token, logout} = AuthUser();
   const logoutUser = () => {
