@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import AuthUser from "./AuthUser";
 import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Alert } from "react-bootstrap";
 
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{5,24}$/;
 
@@ -49,7 +50,7 @@ function FinalizePassword() {
         })
         .then((res) => {
           navigate("/login");
-        });;
+        });
     }
   };
 
