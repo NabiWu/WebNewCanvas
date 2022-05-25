@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import AuthUser from "./AuthUser";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -14,6 +14,62 @@ function AddAssignment() {
   const [dueDate, setDueDate] = useState();
   const [maxPoint, setMaxPoints] = useState();
 
+  let id = location.state["courseID"];
+  const [assigns, setAnns] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  let getAssign = async () => {
+    let data = await http
+      .get(`/course/${id}/assignments`)
+      .then(({ data }) => data);
+    setAnns(data);
+    setLoading(false);
+  };
+  useEffect(() => {
+    getAssign();
+  }, []);
+  let assign_cards;
+  console.log(assigns.length);
+
+  if (assigns.length === 0) {
+    assign_cards = (
+      <>
+        <div>Cong! No assignments so far!</div>
+      </>
+    );
+  } else {
+    assign_cards = assigns.map((assign, idx) => {
+      return (
+        <div key={assign.id}>
+          <div className="card">
+            <div className="card-header"> assignments {idx + 1}</div>
+            <div className="card-body">
+              <Link
+                to="/teacher/course/assignment"
+                state={{
+                  course_id: location.state["courseID"],
+                  assign_id: assign.id,
+                  title: assign.title,
+                  description: assign.description,
+                  max_points: assign.max_points,
+                  due_date: assign.due_date,
+                }}
+              >
+                <h3 className="card-title">{assign.title}</h3>
+              </Link>
+              <pre className="card-text">{assign.description}</pre>
+              <p className="card-text">
+                points: {assign.max_points}{" "}
+                <b> || due date: {assign.due_date}</b>
+              </p>
+            </div>
+          </div>
+          <br></br>
+        </div>
+      );
+    });
+  }
+
   const submitForm = () => {
     http
       .post("/course/assignments", {
@@ -24,7 +80,7 @@ function AddAssignment() {
         course_id: location.state.courseID,
       })
       .then((res) => {
-        navigate("/teacher/courses");
+        window.location.reload(false);
       });
     console.log(title);
     console.log(description);
@@ -82,6 +138,19 @@ function AddAssignment() {
             Add
           </button>
         </form>
+
+        <br />
+        <React.Fragment>
+          <h2>Assignments of {location.state["courseName"]}</h2>
+          <hr></hr>
+          {loading ? (
+            <div className="spinner-border" role="status">
+              <span className="sr-only">Loading...</span>
+            </div>
+          ) : (
+            <div>{assign_cards}</div>
+          )}
+        </React.Fragment>
       </div>
     </>
   );

@@ -10,6 +10,7 @@ import AddCourse from "../components/addCourse";
 import AddStudent from "../components/addStudent";
 import ShowAnnouncements from "../components/showAnnouncements";
 import ShowAssignments from "../components/showAssignments";
+import AdminGrades from "../components/adminViewGrades";
 
 
 function Admin() {
@@ -78,6 +79,10 @@ function Admin() {
           <Route
             path="/courses/:id/assignments"
             element={<ShowAssignments />}
+          />
+          <Route
+            path="/admin/course/assignment"
+            element={<AdminGrades />}
           />
         </Routes>
       </div>

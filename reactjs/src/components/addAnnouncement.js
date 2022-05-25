@@ -10,6 +10,46 @@ function AddAnouncement() {
   const [title, setTitle] = useState();
   const [content, setContent] = useState();
 
+  let id = location.state["courseID"];
+  const [anns, setAnns] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  let getAnn = async () => {
+    let data = await http
+      .get(`/course/${id}/announcements`)
+      .then(({ data }) => data);
+    setAnns(data);
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    getAnn();
+  }, []);
+
+  let anns_cards;
+  if (anns.length === 0) {
+    anns_cards = (
+      <>
+        <div>No announcements!</div>
+      </>
+    );
+  } else {
+    anns_cards = anns.map((ann, idx) => {
+      return (
+        <div key={ann.id}>
+          <div className="card">
+            <div className="card-header">Announcement {idx + 1}</div>
+            <div className="card-body">
+              <h5 className="card-title">{ann.title}</h5>
+              <p className="card-text">{ann.content}</p>
+            </div>
+          </div>
+          <br></br>
+        </div>
+      );
+    });
+  }
+
   const submitForm = () => {
     http
       .post("/course/announcements", {
@@ -18,7 +58,7 @@ function AddAnouncement() {
         course_id: location.state.courseID,
       })
       .then((res) => {
-        navigate("/teacher/courses");
+        window.location.reload(false);
       });
   };
 
@@ -53,6 +93,16 @@ function AddAnouncement() {
             Add
           </button>
         </form>
+
+        <br />
+        <h1>View all Announcement!</h1>
+        {loading ? (
+          <div className="spinner-border" role="status">
+            <span className="sr-only">Loading...</span>
+          </div>
+        ) : (
+          <div>{anns_cards}</div>
+        )}
       </div>
     </>
   );

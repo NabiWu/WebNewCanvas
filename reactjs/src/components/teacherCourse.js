@@ -50,7 +50,7 @@ function TeacherCourse() {
                     courseTeacher: course.teacher_id,
                   }}
                 >
-                  Add Announcement
+                  Announcement
                 </Link>
                 <Link
                   to="/teacher/courses/addAssignment"
@@ -63,7 +63,7 @@ function TeacherCourse() {
                     courseTeacher: course.teacher_id,
                   }}
                 >
-                  Add Assignment
+                  Assignment
                 </Link>
               </div>
             </div>

@@ -21,6 +21,7 @@ function ShowAnnouncements() {
   useEffect(() => {
     getAnn();
   }, []);
+  
   let anns_cards;
   if (anns.length === 0) {
     anns_cards = (

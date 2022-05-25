@@ -36,7 +36,17 @@ function ShowAssignments() {
           <div className="card">
             <div className="card-header"> assignments {idx + 1}</div>
             <div className="card-body">
-              <Link to="/course/assignment">
+              <Link
+                to="/admin/course/assignment"
+                state={{
+                  course_id: location.state["courseID"],
+                  assign_id: assign.id,
+                  title: assign.title,
+                  description: assign.description,
+                  max_points: assign.max_points,
+                  due_date: assign.due_date,
+                }}
+              >
                 <h3 className="card-title">{assign.title}</h3>
               </Link>
               <pre className="card-text">{assign.description}</pre>
