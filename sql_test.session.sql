@@ -29,3 +29,12 @@ where student_id = 3;
 select users.id as studentId, users.name as studentName, grade from submissions join users on users.id=student_id
 where course_id=6;
 -- stu_id, stu_name, grade
+
+select users.name, submissions.student_id, grade from assignments 
+left join submissions on assignments.id = submissions.assignment_id 
+join users on users.id = submissions.student_id
+where assignments.id = 2;
+
+
+-- insert into assignments (course_id, title, description, due_date, max_points)
+-- VALUES (6, 'ass3', 'description3', '6/1/2022', 100);

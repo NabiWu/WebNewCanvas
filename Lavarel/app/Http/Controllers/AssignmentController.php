@@ -60,20 +60,29 @@ class AssignmentController extends Controller
         return $grades;
     }
 
-// as student, get details of an Assignment
-    public function getAssignment($sid, $aid)
+    // as student, get my submission Assignment
+    public function getMySubmission($sid, $aid)
     {
-        
-
     }
 
-    public function getSubmissionofACourse($cid)
+    //stuId, studentName, submission 
+    public function getStudentsSubmission($aid)
     {
-        $sub = DB::select('select users.id as studentId, users.name as studentName, grade from submissions join users on users.id=student_id
-        where course_id= ? ', [$cid]);
-
+        $sub = DB::select('select users.name, submissions.student_id, grade from assignments 
+        left join submissions on assignments.id = submissions.assignment_id 
+        join users on users.id = submissions.student_id
+        where assignments.id = ?;', [$aid]);
         return $sub;
     }
+
+
+    // public function getSubmissionofACourse($cid)
+    // {
+    //     $sub = DB::select('select users.id as studentId, users.name as studentName, grade from submissions join users on users.id=student_id
+    //     where course_id= ? ', [$cid]);
+
+    //     return $sub;
+    // }
     public function submitAssignment()
     {
         $sub = request(['student_id', 'course_id', 'assignment_id', 'answer',]);
