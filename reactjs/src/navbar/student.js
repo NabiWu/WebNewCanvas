@@ -7,7 +7,8 @@ import AuthUser from "../components/AuthUser";
 import StudentCourse from "../components/studentCourse";
 import StudentDashboard from "../components/studentDashboard";
 import ShowAnnouncements from "../components/showAnnouncements";
-import ShowAssignments from "../components/showAssignments";
+import ShowAdminAssignments from "../components/showAdminAssignments";
+import ShowStudentAssignments from "../components/showStudentAssignments";
 
 function Student() {
   const {token, logout} = AuthUser();
@@ -61,7 +62,7 @@ function Student() {
           />
           <Route
             path="/courses/:id/assignments"
-            element={<ShowAssignments />}
+            element={<ShowStudentAssignments />}
           />
         </Routes>
       </div>
