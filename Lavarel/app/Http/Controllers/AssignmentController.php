@@ -107,13 +107,13 @@ class AssignmentController extends Controller
     }
 
 
-    // public function getSubmissionofACourse($cid)
-    // {
-    //     $sub = DB::select('select users.id as studentId, users.name as studentName, grade from submissions join users on users.id=student_id
-    //     where course_id= ? ', [$cid]);
+    public function givaAGrade(){
+        $sub = submission::find(request('submission_id'));
+        $sub->grade = request('grade');
+        $sub->save();
 
-    //     return $sub;
-    // }
+        return response()->json(['message'=>'submission graded!'], 200);
+    }
     public function submitAssignment()
     {
         $sub = request(['student_id', 'course_id', 'assignment_id', 'answer',]);
