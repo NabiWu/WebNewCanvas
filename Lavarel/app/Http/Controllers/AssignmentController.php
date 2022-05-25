@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\assignment;
+use App\Models\submission;
 use Illuminate\Support\Facades\DB;
 
 class AssignmentController extends Controller
 {
+    // for teacher! not for submission
     public function addAssignment()
     {
         $credentials = request(['title', 'description', 'due_date', 'max_points', 'course_id']);
@@ -44,12 +46,21 @@ class AssignmentController extends Controller
     //     return $grades;
     // }
 
-    public function getAssignmentGrades($id){
+    public function getAssignmentGrades($id)
+    {
         $grades = DB::select('select users.id as student_id, users.name as student_name, assignments.title, submissions.grade from assignments join takes on assignments.course_id=takes.course_id
         join users on takes.student_id=users.id 
         left JOIN submissions on submissions.student_id=takes.student_id
         where assignments.id= ? ', [$id]);
         return $grades;
+    }
 
+    public function submitAssignment()
+    {
+        $sub = request(['student_id', 'course_id', 'assignment_id', 'answer',]);
+        var_dump($sub);
+        $sub['grade'] = -1;
+        submission::create($sub);
+        return response()->json('success');
     }
 }

@@ -57,6 +57,7 @@ Route::get('/course/{id}/announcements', [CourseController::class, 'getAnnouncem
 Route::get('/student/{id}/courses', [CourseController::class, 'getAllMyCourses']);
 Route::get('/student/{id}/announcements', [CourseController::class, 'getAllMyAnnouncements']);
 // Route::get('/student/{id}/assignments',[AssignmentController::class, 'addAllMyAssignments'])
+Route::post('student/{sid}/assignment/{aid}', [AssignmentController::class, 'submitAssignment']);
 
 
 Route::post('/course/assignments', [AssignmentController::class, 'addAssignment']);
