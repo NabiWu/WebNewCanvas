@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import AuthUser from "./AuthUser";
 import {getAllStudents} from "./addCourse"
 import { MDBDataTable } from "mdbreact";
-
+import { ScrollMenu} from "react-horizontal-scrolling-menu";
 
 function AddStudent() {
   const location = useLocation();
@@ -86,7 +86,10 @@ function AddStudent() {
   return (
     
     <>
-      <MDBDataTable striped bordered small data={currStudentsData} />
+      <ScrollMenu>
+        <MDBDataTable striped bordered small data={currStudentsData} />
+      </ScrollMenu>
+
       <form>
           <div className="form-group">
             <label>Choose Student:</label>

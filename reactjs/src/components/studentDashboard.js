@@ -2,13 +2,13 @@ import { useEffect, useState } from "react";
 import { Routes, Route, Link, useNavigate } from "react-router-dom";
 import AuthUser from "./AuthUser";
 import React from 'react';
-// import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
-import { MDBCard, MDBCardBody, MDBCardTitle, MDBCardText, MDBContainer } from "mdbreact";
+import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
+import { MDBCard, MDBCardBody, MDBCardTitle, MDBCardText } from "mdbreact";
 
 const PanelPage = (props) => {
   return (
     <MDBContainer>
-      <MDBCard style={{ width: "22rem", marginTop: "1rem" }}>
+      <MDBCard style={{marginTop: "1rem" }}>
         <MDBCardBody>
           <MDBCardTitle>props.assignmentName</MDBCardTitle>
           <MDBCardTitle tag="h6" sub className="mb-2 text-muted">
@@ -34,22 +34,14 @@ function StudentDashboard() {
 
   return (
       <>
-        <div style={{display:"flex" ,justifyContent: "space-evenly" }}>
-            <div style={{display:"column" }}>
-                <h3>To Do</h3>
-                {PanelPage()}
-                {PanelPage()}
-                {PanelPage()}
-            </div>
-            <div style={{display:"column" }}>
-                <h3>Past incoming</h3>
-                {PanelPage()}
-            </div>
-            <div style={{display:"column" }}>
-                <h3>Past</h3>
-                {PanelPage()}
-            </div>
-        </div>
+        <h3 style={{marginTop:"1rem"}}>To Do</h3>
+        {PanelPage()}
+        {PanelPage()}
+        {PanelPage()}
+        <h3 style={{marginTop:"1rem"}}>Past incoming</h3>
+        {PanelPage()}
+        <h3 style={{marginTop:"1rem"}}>Past</h3>
+        {PanelPage()}
       </>
   );
 }
