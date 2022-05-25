@@ -30,7 +30,7 @@ select users.id as studentId, users.name as studentName, grade from submissions 
 where course_id=6;
 -- stu_id, stu_name, grade
 
-select users.name, submissions.student_id, grade from assignments 
+select users.name, submissions.student_id, grade, submissions.answer from assignments 
 left join submissions on assignments.id = submissions.assignment_id 
 join users on users.id = submissions.student_id
 where assignments.id = 2;

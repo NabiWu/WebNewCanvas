@@ -68,10 +68,26 @@ class AssignmentController extends Controller
     //stuId, studentName, submission 
     public function getStudentsSubmission($aid)
     {
-        $sub = DB::select('select users.name, submissions.student_id, grade from assignments 
+        $sub = DB::select('select users.name, submissions.student_id, grade, submissions.answer from assignments 
         left join submissions on assignments.id = submissions.assignment_id 
         join users on users.id = submissions.student_id
         where assignments.id = ?;', [$aid]);
+        foreach($sub as $item){
+            if ($item->grade!='NULL') {
+                if ($item->grade == -1) {
+                    $item->status = "submitted, not graded";
+                    // echo "not graded";
+                } else {
+                    $item->status = "submitted and graded";
+                    // echo $item->grade;
+                }
+            } else {
+                $item->status = "not submitted";
+                unset($item->answer);
+                // echo "not submitted;";
+            }
+            
+        }
         return $sub;
     }
 
