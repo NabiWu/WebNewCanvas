@@ -7,8 +7,8 @@ import { MDBCard, MDBCardBody, MDBCardTitle, MDBCardText, MDBContainer } from "m
 
 const PanelPage = (props) => {
   return (
-    <MDBContainer style={{ width: '33%'}}>
-      <MDBCard style={{ width: "22rem", marginTop: "1rem" }}>
+    <MDBContainer>
+      <MDBCard>
         <MDBCardBody>
           <MDBCardTitle>props.assignmentName</MDBCardTitle>
           <MDBCardTitle tag="h6" sub className="mb-2 text-muted">
@@ -34,16 +34,8 @@ function StudentDashboard() {
 
   return (
       <>
-        <h3>Past</h3>
-        <div style={{display:"flex", flexWrap: "wrap", justifyContent : "space-between", flexDirection: "row"}}>
-                {PanelPage()}
-                {PanelPage()}
-                {PanelPage()}
-                {PanelPage()}
-                {/* {PanelPage()} */}
-                {PanelPage()}
-                <div style={{ width: '33%'}}></div>
-        </div>
+        <h3 style={{marginTop:"1rem"}}>Past</h3>
+        {PanelPage()}
       </>
   );
 }

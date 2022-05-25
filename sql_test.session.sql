@@ -38,3 +38,6 @@ where assignments.id = 2;
 
 -- insert into assignments (course_id, title, description, due_date, max_points)
 -- VALUES (6, 'ass3', 'description3', '6/1/2022', 100);
+
+
+select * from submissions where student_id = ? and assignment_id = ?;
