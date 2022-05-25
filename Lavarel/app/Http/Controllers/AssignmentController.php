@@ -63,6 +63,9 @@ class AssignmentController extends Controller
     // as student, get my submission Assignment
     public function getMySubmission($sid, $aid)
     {
+        $sub = DB::select('select * from submissions
+        where student_id = ? and assignment_id = ?', [$sid, $aid]);
+        return $sub;
     }
 
     //stuId, studentName, submission 
@@ -76,7 +79,7 @@ class AssignmentController extends Controller
         // left join submissions on assignments.id = submissions.assignment_id 
         //         where assignments.id = ? and submissions.assignment_id = ?', [$aid,$aid]
         // right join submissions on users.id = submissions.student_id
-        
+
         $sub = DB::select(' 
             select users.id as student_id, users.name as student_name, assignments.id as ass_id, submissions.id as submission_id, submissions.answer, submissions.grade
             from users
@@ -84,9 +87,9 @@ class AssignmentController extends Controller
             inner join assignments on assignments.course_id = takes.course_id
             left join submissions on assignments.id = submissions.assignment_id and submissions.student_id = takes.student_id
             where assignments.id = ?', [$aid]);
-        foreach($sub as $item){
+        foreach ($sub as $item) {
             // var_dump($item);
-            if ($item->grade!=NULL) {
+            if ($item->grade != NULL) {
                 if ($item->grade == -1) {
                     unset($item->grade);
                     $item->status = "submitted, not graded";
@@ -102,18 +105,18 @@ class AssignmentController extends Controller
                 unset($item->submission_id);
                 // echo "not submitted;";
             }
-            
         }
         return $sub;
     }
 
 
-    public function givaAGrade(){
+    public function givaAGrade()
+    {
         $sub = submission::find(request('submission_id'));
         $sub->grade = request('grade');
         $sub->save();
 
-        return response()->json(['message'=>'submission graded!'], 200);
+        return response()->json(['message' => 'submission graded!'], 200);
     }
     public function submitAssignment()
     {
