@@ -68,13 +68,27 @@ class AssignmentController extends Controller
     //stuId, studentName, submission 
     public function getStudentsSubmission($aid)
     {
-        $sub = DB::select('select users.name, submissions.student_id, grade, submissions.answer from assignments 
-        left join submissions on assignments.id = submissions.assignment_id 
-        join users on users.id = submissions.student_id
-        where assignments.id = ?;', [$aid]);
+        // $sub = DB::select('select users.name, submissions.student_id, grade, submissions.answer from assignments 
+        // left join submissions on assignments.id = submissions.assignment_id 
+        // left join users on users.id = submissions.student_id
+        // where assignments.id = ?;', [$aid]);
+
+        // left join submissions on assignments.id = submissions.assignment_id 
+        //         where assignments.id = ? and submissions.assignment_id = ?', [$aid,$aid]
+        // right join submissions on users.id = submissions.student_id
+        
+        $sub = DB::select(' 
+            select users.id as student_id, users.name as student_name, assignments.id as ass_id, submissions.answer, submissions.grade
+            from users
+            inner join takes on users.id = takes.student_id
+            inner join assignments on assignments.course_id = takes.course_id
+            left join submissions on assignments.id = submissions.assignment_id and submissions.student_id = takes.student_id
+            where assignments.id = ?', [$aid]);
         foreach($sub as $item){
-            if ($item->grade!='NULL') {
+            // var_dump($item);
+            if ($item->grade!=NULL) {
                 if ($item->grade == -1) {
+                    unset($item->grade);
                     $item->status = "submitted, not graded";
                     // echo "not graded";
                 } else {
@@ -84,6 +98,7 @@ class AssignmentController extends Controller
             } else {
                 $item->status = "not submitted";
                 unset($item->answer);
+                unset($item->grade);
                 // echo "not submitted;";
             }
             
