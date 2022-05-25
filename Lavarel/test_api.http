@@ -162,6 +162,9 @@ Content-Type: application/json
     "answer": "assi answer"
 }
 
+### get assignment from a student
+GET http://localhost:8000/api/student/6/assignments HTTP/1.1
+
 
 ###get an assignment's grades
 GET http://localhost:8000/api/submission/6 HTTP/1.1

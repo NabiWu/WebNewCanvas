@@ -28,6 +28,11 @@ class AssignmentController extends Controller
 
     public function getAllMyAssignments($id)
     {
+        $assign = DB::select('select courses.id as courseId, assignments.id as assignmentId, courses.name as courseName,  assignments.title as assignmentName,max_points, due_date
+        from takes 
+        join assignments on takes.course_id=assignments.course_id join courses on courses.id=takes.course_id
+        where student_id = ?', [$id]);
+        return $assign;
     }
 
     //get all assignments submissions and grades in a course
@@ -55,9 +60,11 @@ class AssignmentController extends Controller
         return $grades;
     }
 
-
+// as student, get details of an Assignment
     public function getAssignment($sid, $aid)
     {
+        
+
     }
 
     public function getSubmissionofACourse($cid)
