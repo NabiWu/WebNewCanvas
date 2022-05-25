@@ -26,25 +26,26 @@ class AssignmentController extends Controller
 
 
 
-    // public function getAllMyAssignments($id)
-    // {
+    public function getAllMyAssignments($id)
+    {
+        
+    }
 
-    // }
+    //get all assignments submissions and grades in a course
+    public function getCourseGrades($id)
+    {
+        $grades = DB::select('select name as course_name, stu_name, gra 
+        from  (
+                select users.name as stu_name, users.id as stu_id
+                from takes
+                    join users on users.id = takes.student_id
+                where takes.course_id = ?
+        ) as stu left join submissions as subs 
+        on subs.student_id=stu.id 
+        join courses on courses.id=subs.course_id', [$id]);
 
-    // //get all assignments submissions and grades in a course
-    // public function getCourseGrades($id){
-    //     $grades = DB::select('select name as course_name, stu_name, gra 
-    //     from  (
-    //             select users.name as stu_name, users.id as stu_id
-    //             from takes
-    //                 join users on users.id = takes.student_id
-    //             where takes.course_id = ?
-    //     ) as stu left join submissions as subs 
-    //     on subs.student_id=stu.id 
-    //     join courses on courses.id=subs.course_id', [$id]);
-
-    //     return $grades;
-    // }
+        return $grades;
+    }
 
     public function getAssignmentGrades($id)
     {
