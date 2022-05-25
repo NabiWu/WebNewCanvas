@@ -4,9 +4,10 @@ import Home from "../components/home";
 import Profile from "../components/profile";
 import Dashboard from "../components/dashboard";
 import AuthUser from "../components/AuthUser";
+import StudentCourse from "../components/studentCourse";
+import StudentDashboard from "../components/studentDashboard";
 
-
-function Auth() {
+function Student() {
   const {token, logout} = AuthUser();
   const logoutUser = () => {
     if (token !== undefined){
@@ -35,6 +36,11 @@ function Auth() {
             </Link>
           </li>
           <li className="nav-item">
+            <Link className="nav-link" to="/student/courses">
+              Courses
+            </Link>
+          </li>
+          <li className="nav-item">
             <span role="button" className="nav-link" onClick={logoutUser}>
               Logout
             </span>
@@ -45,11 +51,12 @@ function Auth() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/dashboard" element={<StudentDashboard />} />
+          <Route path="/student/courses" element={<StudentCourse />} />
         </Routes>
       </div>
     </>
   );
 }
 
-export default Auth;
+export default Student;

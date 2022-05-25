@@ -2,7 +2,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import AuthUser from "./components/AuthUser";
 import Guest from "./navbar/guest";
 import  Admin from "./navbar/admin";
-import Auth from "./navbar/auth";
+import Student from "./navbar/student";
 import Teacher from "./navbar/teacher";
 
 function App() {
@@ -13,7 +13,7 @@ function App() {
   } else {
     const userRole = getRole();
     if (userRole === "student") {
-      return <Auth />;
+      return <Student />;
     } else if (userRole === "teacher") {
       return <Teacher />;
     } else if (userRole === "admin") {

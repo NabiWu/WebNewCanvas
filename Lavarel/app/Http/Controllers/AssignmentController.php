@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\assignment;
+use Illuminate\Support\Facades\DB;
 
 class AssignmentController extends Controller
 {
@@ -23,8 +24,32 @@ class AssignmentController extends Controller
 
 
 
-    public function getAllMyAssignments($id)
-    {
+    // public function getAllMyAssignments($id)
+    // {
+
+    // }
+
+    // //get all assignments submissions and grades in a course
+    // public function getCourseGrades($id){
+    //     $grades = DB::select('select name as course_name, stu_name, gra 
+    //     from  (
+    //             select users.name as stu_name, users.id as stu_id
+    //             from takes
+    //                 join users on users.id = takes.student_id
+    //             where takes.course_id = ?
+    //     ) as stu left join submissions as subs 
+    //     on subs.student_id=stu.id 
+    //     join courses on courses.id=subs.course_id', [$id]);
+
+    //     return $grades;
+    // }
+
+    public function getAssignmentGrades($id){
+        $grades = DB::select('select users.id as student_id, users.name as student_name, assignments.title, submissions.grade from assignments join takes on assignments.course_id=takes.course_id
+        join users on takes.student_id=users.id 
+        left JOIN submissions on submissions.student_id=takes.student_id
+        where assignments.id= ? ', [$id]);
+        return $grades;
 
     }
 }
