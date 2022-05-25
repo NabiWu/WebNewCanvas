@@ -2,7 +2,7 @@
 import { Routes, Route, Link } from "react-router-dom";
 import Home from "../components/home";
 import Profile from "../components/profile";
-import Dashboard from "../components/dashboard";
+import AdminDashboard from "../components/adminDashboard";
 import AuthUser from "../components/AuthUser";
 import Setting from "../components/setting";
 import AdminCourse from "../components/adminCourse";
@@ -10,6 +10,8 @@ import AddCourse from "../components/addCourse";
 import AddStudent from "../components/addStudent";
 import ShowAnnouncements from "../components/showAnnouncements";
 import ShowAssignments from "../components/showAssignments";
+
+
 function Admin() {
   const { token, logout } = AuthUser();
 
@@ -36,7 +38,7 @@ function Admin() {
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" to="/dashboard">
+            <Link className="nav-link" to="/admin/dashboard">
               Dashboard
             </Link>
           </li>
@@ -61,7 +63,7 @@ function Admin() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/admin/dashboard" element={<AdminDashboard />} />
           <Route path="/setting" element={<Setting />} />
           <Route path="/admin/courses" element={<AdminCourse />} />
           <Route path="/admin/courses/addCourse" element={<AddCourse />} />

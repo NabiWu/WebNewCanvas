@@ -37,5 +37,32 @@ class UserController extends Controller
         return response()->json(['message'=>'Status changed'], 200);
     }
 
+    
+
+    public function updateProfile()
+    {
+        $user = User::find(request('id'));
+        $user->name = request('name');
+        $user->email = request('email');
+        $user->ques1 = request('ques1');
+        $user->ques2 = request('ques2');
+        $user->ques3 = request('ques3');
+        $user->ans1 = request('ans1');
+        $user->ans2 = request('ans2');
+        $user->ans3 = request('ans3');
+        $user->save();
+
+        return response()->json(['message'=>'Status changed'], 200);
+    }
+
+        public function updatePassword()
+    {
+        $user = User::find(request('id'));
+        $user->password = bcrypt(request('password'));
+        $user->save();
+
+        return response()->json(['message'=>'Status changed'], 200);
+    }
+
 
 }

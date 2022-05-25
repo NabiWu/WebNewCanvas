@@ -3,6 +3,9 @@ import { Routes, Route, Link } from "react-router-dom";
 import Home from "../components/home";
 import Login from "../components/login";
 import Register from "../components/register";
+import VerifyEmail from "../components/verifyEmail";
+import VerifyAnswer from "../components/verifyAnswer";
+import FinalizePassword from "../components/finalizePassword";
 
 function Guest() {
 
@@ -32,6 +35,15 @@ function Guest() {
       <div className="container">
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/resetpassword" element={<VerifyEmail />} />
+          <Route
+            path="/resetpassword/securityQestion"
+            element={<VerifyAnswer />}
+          />
+          <Route
+            path="/resetpassword/reset"
+            element={<FinalizePassword />}
+          />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
         </Routes>

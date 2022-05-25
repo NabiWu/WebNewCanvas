@@ -25,35 +25,35 @@ class DatabaseSeeder extends Seeder
             'password'=> bcrypt('password'),
             'email' => 'admin@admin.com',
             'role' => 'admin',
-            'isActive' => TRUE,
+            'isActive' => "true",
         ]);
         User::create([
             'name' => 'teacher1',
             'password'=> bcrypt('password'),
             'email' => 'teacher1@gmail.com',
             'role' => 'teacher',
-            'isActive' => FALSE,
+            'isActive' => "false",
         ]);
         User::create([
             'name' => 'student1',
             'password'=> bcrypt('password'),
             'email' => 'student1@gmail.com',
             'role' => 'student',
-            'isActive' => TRUE,
+            'isActive' => "false",
         ]);
         User::create([
             'name' => 'student2',
             'password'=> bcrypt('password'),
             'email' => 'student2@gmail.com',
             'role' => 'student',
-            'isActive' => TRUE,
+            'isActive' => "false",
         ]);
         User::create([
             'name' => 'student3',
             'password'=> bcrypt('password'),
             'email' => 'student3@gmail.com',
             'role' => 'student',
-            'isActive' => TRUE,
+            'isActive' => "false",
         ]);
     
         announcement::create([

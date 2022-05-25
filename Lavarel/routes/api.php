@@ -36,6 +36,8 @@ Route::get('admin/getAllUsers', [UserController::class, 'getAllUsers']);
 Route::get('admin/getAllStudents', [UserController::class, 'getAllStudents']);
 Route::get('admin/getAllTeachers', [UserController::class, 'getAllTeachers']);
 Route::put('admin/changeStatus', [UserController::class, 'changeStatus']);
+Route::put('profile', [UserController::class, 'updateProfile']);
+Route::put('password', [UserController::class, 'updatePassword']);
 
 Route::post('admin/addCourse', [CourseController::class, 'addCourse']);
 Route::get('admin/getAllCourses', [CourseController::class, 'getAllCourses']);

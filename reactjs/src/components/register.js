@@ -2,16 +2,28 @@ import { useRef, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthUser from "./AuthUser";
 
-import {
-  faCheck,
-  faTimes,
-  faInfoCircle,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{5,24}$/;
 const EMAIL_REGEX = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-z]+)$/;
+
+const Questions = [
+  { id: 1, question: "What city were you born in?" },
+  { id: 2, question: "What is your oldest sibling’s middle name?r" },
+  { id: 3, question: "What was the first concert you attended?" },
+  { id: 4, question: "What was the make and model of your first car?" },
+  { id: 5, question: "In what city or town did your parents meet?" },
+  {
+    id: 6,
+    question: "What was the name of the boy or the girl you first kissed?",
+  },
+  { id: 7, question: "What was the first exam you failed?" },
+  { id: 8, question: "What is the name of your first school?" },
+  { id: 9, question: "What was your favorite food as a child?" },
+  {
+    id: 10,
+    question: "What is the name of your favorite pet?",
+  },
+];
 
 export default function Register() {
   const userRef = useRef();
@@ -32,6 +44,13 @@ export default function Register() {
   const [validMatch, setValidMatch] = useState(false);
 
   const [role, setRole] = useState("student");
+
+  const [ques1, setQues1] = useState();
+  const [ques2, setQues2] = useState();
+  const [ques3, setQues3] = useState();
+  const [ans1, setAns1] = useState();
+  const [ans2, setAns2] = useState();
+  const [ans3, setAns3] = useState();
 
   useEffect(() => {
     const result = USER_REGEX.test(name);
@@ -67,6 +86,12 @@ export default function Register() {
           name: name,
           role: role,
           isActive: "false",
+          ques1: ques1,
+          ques2: ques2,
+          ques3: ques3,
+          ans1: ans1,
+          ans2: ans2,
+          ans3: ans3,
         })
         .then((res) => {
           navigate("/login");
@@ -78,7 +103,7 @@ export default function Register() {
     <div className="row justify-content-center pt-5">
       <div className="col-sm-6">
         <div className="card p-4">
-          <h1 className="text-center mb-3">Register </h1>
+          <h1 className="text-center mb-1">Register </h1>
 
           <div className="form-check">
             <input
@@ -120,7 +145,7 @@ export default function Register() {
               Letters, numbers, underscores, hyphens allowed.
             </p>
           </div>
-          <div className="form-group mt-3">
+          <div className="form-group mt-1">
             <label>Email address:</label>
             <input
               type="email"
@@ -129,9 +154,10 @@ export default function Register() {
               onChange={(e) => setEmail(e.target.value)}
               id="email"
             />
+            <p className="text-muted small">xxx@xxx.xxx</p>
           </div>
 
-          <div className="form-group mt-3">
+          <div className="form-group mt-1">
             <label>Password:</label>
             <input
               type="password"
@@ -154,8 +180,7 @@ export default function Register() {
               <span aria-label="percent">%</span>
             </p>
           </div>
-
-          <div className="form-group mt-3">
+          <div className="form-group mt-1">
             <label>Confirm Password:</label>
             <input
               type="password"
@@ -168,6 +193,85 @@ export default function Register() {
               Must match the first password input field.
             </p>
           </div>
+          <div className="form-group">
+            <label>Security Question1:</label>
+            <select
+              className="form-control"
+              id="exampleFormControlSelect1"
+              defaultValue={"DEFAULT"}
+              onChange={(e) => setQues1(e.target.value)}
+            >
+              <option value="DEFAULT" disabled>
+                Choose one you like
+              </option>
+              {Questions.map((question) => {
+                return <option key={question.id}>{question.question}</option>;
+              })}
+            </select>
+          </div>
+          <div className="form-group mt-1">
+            <label>Answer1:</label>
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Enter Answer 1"
+              onChange={(e) => setAns1(e.target.value)}
+              id="ans1"
+            />
+          </div>
+          <div className="form-group">
+            <label>Security Question2:</label>
+            <select
+              className="form-control"
+              id="exampleFormControlSelect1"
+              defaultValue={"DEFAULT"}
+              onChange={(e) => setQues2(e.target.value)}
+            >
+              <option value="DEFAULT" disabled>
+                Choose one you like
+              </option>
+              {Questions.map((question) => {
+                return <option key={question.id}>{question.question}</option>;
+              })}
+            </select>
+          </div>
+          <div className="form-group mt-1">
+            <label>Answer2:</label>
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Enter Answer 2"
+              onChange={(e) => setAns2(e.target.value)}
+              id="ans2"
+            />
+          </div>
+          <div className="form-group">
+            <label>Security Question3:</label>
+            <select
+              className="form-control"
+              id="exampleFormControlSelect1"
+              defaultValue={"DEFAULT"}
+              onChange={(e) => setQues3(e.target.value)}
+            >
+              <option value="DEFAULT" disabled>
+                Choose one you like
+              </option>
+              {Questions.map((question) => {
+                return <option key={question.id}>{question.question}</option>;
+              })}
+            </select>
+          </div>
+          <div className="form-group mt-1">
+            <label>Answer3:</label>
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Enter Answer 3"
+              onChange={(e) => setAns3(e.target.value)}
+              id="ans3"
+            />
+          </div>
+
           <button
             type="button"
             onClick={submitForm}

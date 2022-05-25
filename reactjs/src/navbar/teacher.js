@@ -7,7 +7,7 @@ import AuthUser from "../components/AuthUser";
 import TeacherCourse from "../components/teacherCourse";
 import AddAnouncement from "../components/addAnnouncement";
 import AddAssignment from "../components/addAssignment";
-
+import TeacherDashboard from "../components/teacherDashboard";
 function Teacher() {
   const {token, logout} = AuthUser();
 
@@ -53,7 +53,7 @@ function Teacher() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/dashboard" element={<TeacherDashboard />} />
           <Route path="/teacher/courses" element={<TeacherCourse />} />
           <Route
             path="/teacher/courses/addAnouncement"

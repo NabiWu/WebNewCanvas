@@ -1,5 +1,6 @@
 import { useState } from "react";
 import AuthUser from "./AuthUser";
+import { Link } from "react-router-dom";
 
 export default function Login() {
   const { http, setToken } = AuthUser();
@@ -45,6 +46,9 @@ export default function Login() {
           >
             Login
           </button>
+          <Link to="/resetpassword" className="link-secondary text-center">
+            Forget Password
+          </Link>
         </div>
       </div>
     </div>
