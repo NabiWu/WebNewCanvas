@@ -174,3 +174,7 @@ Content-Type: application/json
 ###
 GET http://localhost:8000/api/teacher/assignment/1 HTTP/1.1
 Content-Type: application/json
+
+###
+GET http://localhost:8000/api/student/3/courses HTTP/1.1
+Content-Type: application/json
