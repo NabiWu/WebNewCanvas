@@ -152,12 +152,17 @@ GET http://localhost:8000/api/assignment/1/grades HTTP/1.1
 Content-Type: application/json
 
 ###submit an assignment
-POST http://localhost:8000/api/student/5/assignment/1 HTTP/1.1
+POST http://localhost:8000/api/student/1/assignment/1 HTTP/1.1
 Content-Type: application/json
 
 {
     "student_id": 5, 
     "course_id": 6,
-    "assignment_id": 1, 
+    "assignment_id": 2, 
     "answer": "assi answer"
 }
+
+
+###get an assignment's grades
+GET http://localhost:8000/api/submission/6 HTTP/1.1
+Content-Type: application/json
