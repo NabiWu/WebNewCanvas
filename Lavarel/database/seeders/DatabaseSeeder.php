@@ -5,6 +5,12 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\announcement;
+use App\Models\Course;
+use App\Models\take;
+use App\Models\submission;
+
+
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -14,8 +20,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        //  \App\Models\User::factory(2)->create();
-
         User::create([
             'name' => 'admin',
             'password'=> bcrypt('password'),
@@ -35,23 +39,23 @@ class DatabaseSeeder extends Seeder
             'password'=> bcrypt('password'),
             'email' => 'student1@gmail.com',
             'role' => 'student',
-            'isActive' => FALSE,
+            'isActive' => TRUE,
         ]);
         User::create([
             'name' => 'student2',
             'password'=> bcrypt('password'),
             'email' => 'student2@gmail.com',
             'role' => 'student',
-            'isActive' => FALSE,
+            'isActive' => TRUE,
         ]);
         User::create([
             'name' => 'student3',
             'password'=> bcrypt('password'),
             'email' => 'student3@gmail.com',
             'role' => 'student',
-            'isActive' => FALSE,
+            'isActive' => TRUE,
         ]);
-
+    
         announcement::create([
             'title' => 'ann1',
             'content' => 'blabla',
