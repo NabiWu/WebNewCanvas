@@ -78,7 +78,7 @@ class AssignmentController extends Controller
         // right join submissions on users.id = submissions.student_id
         
         $sub = DB::select(' 
-            select users.id as student_id, users.name as student_name, assignments.id as ass_id, submissions.answer, submissions.grade
+            select users.id as student_id, users.name as student_name, assignments.id as ass_id, submissions.id as submission_id, submissions.answer, submissions.grade
             from users
             inner join takes on users.id = takes.student_id
             inner join assignments on assignments.course_id = takes.course_id
@@ -99,6 +99,7 @@ class AssignmentController extends Controller
                 $item->status = "not submitted";
                 unset($item->answer);
                 unset($item->grade);
+                unset($item->submission_id);
                 // echo "not submitted;";
             }
             
