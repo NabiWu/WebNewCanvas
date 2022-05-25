@@ -28,7 +28,6 @@ class AssignmentController extends Controller
 
     public function getAllMyAssignments($id)
     {
-        
     }
 
     //get all assignments submissions and grades in a course
@@ -56,10 +55,21 @@ class AssignmentController extends Controller
         return $grades;
     }
 
+
+    public function getAssignment($sid, $aid)
+    {
+    }
+
+    public function getSubmissionofACourse($cid)
+    {
+        $sub = DB::select('select users.id as studentId, users.name as studentName, grade from submissions join users on users.id=student_id
+        where course_id= ? ', [$cid]);
+
+        return $sub;
+    }
     public function submitAssignment()
     {
         $sub = request(['student_id', 'course_id', 'assignment_id', 'answer',]);
-        var_dump($sub);
         $sub['grade'] = -1;
         submission::create($sub);
         return response()->json('success');
