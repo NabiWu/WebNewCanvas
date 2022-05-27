@@ -2,55 +2,99 @@ import { useEffect, useState } from "react";
 import { Routes, Route, Link, useNavigate } from "react-router-dom";
 import AuthUser from "./AuthUser";
 import React from 'react';
-// import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
-import { MDBCard, MDBCardBody, MDBCardTitle, MDBCardText, MDBContainer } from "mdbreact";
+import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
+import { MDBCard, MDBCardBody, MDBCardTitle, MDBCardText } from "mdbreact";
 
 const PanelPage = (props) => {
   return (
     <MDBContainer>
-      <MDBCard style={{ width: "22rem", marginTop: "1rem" }}>
+      <MDBCard style={{ marginTop: "1rem" }}>
         <MDBCardBody>
-          <MDBCardTitle>props.assignmentName</MDBCardTitle>
+          <MDBCardTitle>{props.assignmentName}</MDBCardTitle>
           <MDBCardTitle tag="h6" sub className="mb-2 text-muted">
-            props.courseName
+            {props.courseName}
           </MDBCardTitle>
           <MDBCardText>
-            10 points
-            due: 05/25/2022
-            {/* props.points */}
+            {props.max_points} points ||
+            due: {props.due_date}
           </MDBCardText>
-          <Link className="nav-link" to="/">
-              Home
-          </Link>
         </MDBCardBody>
       </MDBCard>
     </MDBContainer>
   );
 };
-
+function addDays(date, days) {
+  var result = date;
+  result.setDate(result.getDate() + days);
+  return result;
+}
 function StudentDashboard() {
-  const { http } = AuthUser();
+  const { http, user } = AuthUser();
   let navigate = useNavigate();
+  const [TODOAssin, setTODOAssin] = useState([]);
+  const [IncomingAssin, setIncomingAssin] = useState([]);
+  const [PastAssin, setPastAssin] = useState([]);
+
+  let getAllAssins = async () => {
+    let id = user['id'];
+    let data = await http.get(`/student/${id}/assignments`).then(({ data }) => data);
+    // setAllAssins(data);
+    let _TODOAssin = data.filter((item) => {
+      let cur_add_3 = addDays(new Date(), 3);
+      let due = new Date(item['due_date']);
+      return cur_add_3 >= due && due >= new Date();
+    });
+
+    let _IncomingAssin = data.filter((item) => {
+      let cur_add_3 = addDays(new Date(), 3);
+      let due = new Date(item['due_date']);
+      return cur_add_3 < due;
+
+    });
+
+    let _PastAssin = data.filter((item) => {
+      let due = new Date(item['due_date']);
+      let today = new Date();
+      return today >= due;
+    });
+
+    setTODOAssin(_TODOAssin);
+    setIncomingAssin(_IncomingAssin);
+    setPastAssin(_PastAssin);
+
+  }
+
+  useEffect(() => {
+    getAllAssins();
+  }, []);
 
   return (
-      <>
-        <div style={{display:"flex" ,justifyContent: "space-evenly" }}>
-            <div style={{display:"column" }}>
-                <h3>To Do</h3>
-                {PanelPage()}
-                {PanelPage()}
-                {PanelPage()}
-            </div>
-            <div style={{display:"column" }}>
-                <h3>Past incoming</h3>
-                {PanelPage()}
-            </div>
-            <div style={{display:"column" }}>
-                <h3>Past</h3>
-                {PanelPage()}
-            </div>
-        </div>
-      </>
+    <>
+      <h3 style={{ marginTop: "1rem" }}>To Do</h3>
+      {TODOAssin.map((item, idx) => {
+        return (<PanelPage assignmentName={item.assignmentName}
+          courseName={item.courseName}
+          max_points={item.max_points}
+          due_date={item.due_date}
+        />);
+      })}
+      <h3 style={{ marginTop: "1rem" }}>Incoming</h3>
+      {IncomingAssin.map((item, idx) => {
+        return (<PanelPage assignmentName={item.assignmentName}
+          courseName={item.courseName}
+          max_points={item.max_points}
+          due_date={item.due_date}
+        />);
+      })}
+      <h3 style={{ marginTop: "1rem" }}>Past</h3>
+      {PastAssin.map((item, idx) => {
+        return (<PanelPage assignmentName={item.assignmentName}
+          courseName={item.courseName}
+          max_points={item.max_points}
+          due_date={item.due_date}
+        />);
+      })}
+    </>
   );
 }
 

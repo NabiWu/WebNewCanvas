@@ -8,6 +8,9 @@ import TeacherCourse from "../components/teacherCourse";
 import AddAnouncement from "../components/addAnnouncement";
 import AddAssignment from "../components/addAssignment";
 import TeacherDashboard from "../components/teacherDashboard";
+import TeacherGrades from "../components/teacherViewGrades";
+
+
 function Teacher() {
   const {token, logout} = AuthUser();
 
@@ -62,6 +65,10 @@ function Teacher() {
           <Route
             path="/teacher/courses/addAssignment"
             element={<AddAssignment />}
+          />
+          <Route
+            path="/teacher/course/assignment"
+            element={<TeacherGrades />}
           />
         </Routes>
       </div>

@@ -56,5 +56,6 @@ export default function AuthUser() {
     getRole,
     http,
     logout,
+    getUser
   };
 }

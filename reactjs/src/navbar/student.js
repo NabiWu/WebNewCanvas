@@ -6,6 +6,9 @@ import Dashboard from "../components/dashboard";
 import AuthUser from "../components/AuthUser";
 import StudentCourse from "../components/studentCourse";
 import StudentDashboard from "../components/studentDashboard";
+import ShowAnnouncements from "../components/showAnnouncements";
+import ShowAdminAssignments from "../components/showAdminAssignments";
+import ShowStudentAssignments from "../components/showStudentAssignments";
 
 function Student() {
   const {token, logout} = AuthUser();
@@ -36,7 +39,7 @@ function Student() {
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" to="/student/courses">
+            <Link className="nav-link" to="/student/courses" >
               Courses
             </Link>
           </li>
@@ -53,6 +56,14 @@ function Student() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/dashboard" element={<StudentDashboard />} />
           <Route path="/student/courses" element={<StudentCourse />} />
+          <Route
+            path="/courses/:id/announcements"
+            element={<ShowAnnouncements />}
+          />
+          <Route
+            path="/courses/:id/assignments"
+            element={<ShowStudentAssignments />}
+          />
         </Routes>
       </div>
     </>
