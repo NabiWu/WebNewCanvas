@@ -17,18 +17,14 @@ const PanelPage = (props) => {
           <MDBCardText>
             {props.max_points} points ||
             due: {props.due_date}
-
           </MDBCardText>
-          <Link className="nav-link" to="/">
-            Home
-          </Link>
         </MDBCardBody>
       </MDBCard>
     </MDBContainer>
   );
 };
 function addDays(date, days) {
-  var result = new Date(date);
+  var result = date;
   result.setDate(result.getDate() + days);
   return result;
 }
@@ -45,14 +41,12 @@ function StudentDashboard() {
     // setAllAssins(data);
     let _TODOAssin = data.filter((item) => {
       let cur_add_3 = addDays(new Date(), 3);
-      console.log(cur_add_3);
       let due = new Date(item['due_date']);
-      return cur_add_3 >= due;
+      return cur_add_3 >= due && due >= new Date();
     });
 
     let _IncomingAssin = data.filter((item) => {
       let cur_add_3 = addDays(new Date(), 3);
-      console.log(cur_add_3);
       let due = new Date(item['due_date']);
       return cur_add_3 < due;
 
@@ -60,7 +54,8 @@ function StudentDashboard() {
 
     let _PastAssin = data.filter((item) => {
       let due = new Date(item['due_date']);
-      return Date() >= due;
+      let today = new Date();
+      return today >= due;
     });
 
     setTODOAssin(_TODOAssin);

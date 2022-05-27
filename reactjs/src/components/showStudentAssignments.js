@@ -168,7 +168,7 @@ function ShowStudentAssignments() {
         student_id: user.id,
         course_id: id,
         assignment_id: assiId,
-        answer: answer,
+        grade: grade,
       });
     handleUnSubmittedClose();
     window.location.reload(false);
