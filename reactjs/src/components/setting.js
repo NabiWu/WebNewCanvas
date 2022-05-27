@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 import AuthUser from "./AuthUser";
 import { MDBDataTable } from "mdbreact";
-import { ScrollMenu} from "react-horizontal-scrolling-menu";
+import { ScrollMenu } from "react-horizontal-scrolling-menu";
 
 function Setting() {
   const { http } = AuthUser();
-  
 
   const [allUsers, setAllUsers] = useState([]);
   const [usersForRender, setUsersForRender] = useState([]);
@@ -93,10 +92,10 @@ function Setting() {
 
   return (
     <>
-    <ScrollMenu>
-      <MDBDataTable striped bordered small data={data} />
-    </ScrollMenu>
-      
+    {/* TODO */}
+        <ScrollMenu>
+          <MDBDataTable striped bordered small data={data} />
+        </ScrollMenu>
     </>
   );
 }

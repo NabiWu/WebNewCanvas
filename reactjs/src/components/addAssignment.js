@@ -126,7 +126,7 @@ function AddAssignment() {
             <DatePicker
               selected={dueDate}
               onChange={(date) => setDueDate(date)}
-              minDate={new Date()}
+              // minDate={new Date()}
             />
           </div>
 

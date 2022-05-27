@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import AuthUser from "./AuthUser";
 
-function ShowAssignments() {
+function ShowAdminAssignments() {
   const location = useLocation();
   const { http } = AuthUser();
 
@@ -77,4 +77,4 @@ function ShowAssignments() {
   );
 }
 
-export default ShowAssignments;
+export default ShowAdminAssignments;

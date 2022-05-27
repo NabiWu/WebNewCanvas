@@ -11,127 +11,130 @@ import { MDBDataTable } from "mdbreact";
 import { Card, Button, Modal, Form } from "react-bootstrap";
 
 function TeacherGrades() {
-    const { http } = AuthUser();
-    const location = useLocation();
+  const { http } = AuthUser();
+  const location = useLocation();
 
-    const [answer, setAnswer] = useState();
-    const [grade, setGrade] = useState();
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = async (item) => {
-        await setAnswer(item.answer);
-        setShow(true);
-    };
-    const [allInfo, setAllInfo] = useState([]);
-    const [gradedAssi, setGradedAssi] = useState([]);
-    const [submittedUngradedAssi, setSubmittedUngradedAssi] = useState([]);
-    const [unsubmittedAssi, setUnsubmittedAssi] = useState([]);
-    // console.log(location.state);
-// teacher / assignment / { aid };
+  const [answer, setAnswer] = useState();
+  const [submitID, setSubmitID] = useState();
+  const [grade, setGrade] = useState();
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = async (item) => {
+    await setAnswer(item.answer);
+    await setSubmitID(item.submission_id);
+    setShow(true);
+  };
+  const [allInfo, setAllInfo] = useState([]);
+  const [gradedAssi, setGradedAssi] = useState([]);
+  const [submittedUngradedAssi, setSubmittedUngradedAssi] = useState([]);
+  const [unsubmittedAssi, setUnsubmittedAssi] = useState([]);
+  // console.log(location.state);
+  // teacher / assignment / { aid };
 
-    let getAssignments = async () => {
-        let data = await http
-          .get("teacher/assignment/" + location.state.assign_id)
-          .then(({ data }) => setAllInfo(data));
-    };
+  let getAssignments = async () => {
+    let data = await http
+      .get("teacher/assignment/" + location.state.assign_id)
+      .then(({ data }) => setAllInfo(data));
+  };
 
-    let assignGrade = async (item) => {
-        console.log(item)
-    };
+  let assignGrade = async (item) => {
+    console.log(item);
+  };
 
-    useEffect(() => {
-      getAssignments();
-    }, []);
+  useEffect(() => {
+    getAssignments();
+  }, []);
 
-    useEffect(() => {
-      setGradedAssi(
-        allInfo.filter((assi) => assi.status === "submitted and graded")
+  useEffect(() => {
+    setGradedAssi(
+      allInfo.filter((assi) => assi.status === "submitted and graded")
+    );
+    let ungradedAssiRaw = allInfo.filter(
+      (assi) => assi.status === "submitted, not graded"
+    );
+    let submittedUngradedAssi = [];
+    ungradedAssiRaw.map((item, index) => {
+      item.action = (
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <div
+            className="uil-trash-alt"
+            style={{
+              cursor: "pointer",
+              color: "black",
+              fontSize: ".7em",
+              padding: ".5rem",
+              borderRadius: ".3rem",
+              background: "#fb6262",
+            }}
+            onClick={() => handleShow(item)}
+          >
+            Assign Grade
+          </div>
+        </div>
       );
-      let ungradedAssiRaw = allInfo.filter(
-        (assi) => assi.status === "submitted, not graded"
-      );
-      let submittedUngradedAssi = [];
-      ungradedAssiRaw.map((item, index) => {
-            item.action = (
-              <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <div
-                  className="uil-trash-alt"
-                  style={{
-                    cursor: "pointer",
-                    color: "black",
-                    fontSize: ".7em",
-                    padding: ".5rem",
-                    borderRadius: ".3rem",
-                    background: "#fb6262",
-                  }}
-                  onClick={() => handleShow(item)}
-                >
-                  Assign Grade
-                </div>
-              </div>
-            );
-            submittedUngradedAssi.push(item)
-      });
-      setSubmittedUngradedAssi(submittedUngradedAssi);
-      setUnsubmittedAssi(
-        allInfo.filter((assi) => assi.status === "not submitted")
-      );
-    }, [allInfo]);
+      submittedUngradedAssi.push(item);
+    });
+    setSubmittedUngradedAssi(submittedUngradedAssi);
+    setUnsubmittedAssi(
+      allInfo.filter((assi) => assi.status === "not submitted")
+    );
+  }, [allInfo]);
 
-    const gradedData = {
-      columns: [
-        {
-          label: "Name",
-          field: "student_name",
-          sort: "asc",
-          width: 150,
-        },
-        {
-          label: "Grade",
-          field: "grade",
-          sort: "asc",
-          width: 200,
-        },
-      ],
-      rows: gradedAssi,
-    };
-    const submittedUngradedData = {
-      columns: [
-        {
-          label: "Name",
-          field: "student_name",
-          sort: "asc",
-          width: 150,
-        },
-        {
-          label: "Action",
-          field: "action",
-          width: 100,
-        },
-      ],
-      rows: submittedUngradedAssi,
-    };
+  const gradedData = {
+    columns: [
+      {
+        label: "Name",
+        field: "student_name",
+        sort: "asc",
+        width: 150,
+      },
+      {
+        label: "Grade",
+        field: "grade",
+        sort: "asc",
+        width: 200,
+      },
+    ],
+    rows: gradedAssi,
+  };
+  const submittedUngradedData = {
+    columns: [
+      {
+        label: "Name",
+        field: "student_name",
+        sort: "asc",
+        width: 150,
+      },
+      {
+        label: "Action",
+        field: "action",
+        width: 100,
+      },
+    ],
+    rows: submittedUngradedAssi,
+  };
 
-    const unsubmittedData = {
-      columns: [
-        {
-          label: "Name",
-          field: "student_name",
-          sort: "asc",
-          width: 150,
-        },
-      ],
-      rows: unsubmittedAssi,
-    };
+  const unsubmittedData = {
+    columns: [
+      {
+        label: "Name",
+        field: "student_name",
+        sort: "asc",
+        width: 150,
+      },
+    ],
+    rows: unsubmittedAssi,
+  };
 
   const updateInfo = async () => {
-    // await http.put("/profile", {
-      
-    // });
-    // setShow(false);
+    await http.put("/teacher/giveAGrade", {
+      submission_id: submitID,
+      grade: grade,
+    });
+    setShow(false);
     window.location.reload(false);
   };
- 
+
   return (
     <>
       <h3>Graded Students</h3>
