@@ -1,5 +1,5 @@
 
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Link, Navigate } from "react-router-dom";
 import Home from "../components/home";
 import Profile from "../components/profile";
 import AdminDashboard from "../components/adminDashboard";
@@ -57,7 +57,7 @@ function Admin() {
       </nav>
       <div className="container">
         <Routes>
-          <Route path="/" element={<Profile />} />
+          <Route exact path="/" element={<Navigate replace to="/profile" />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
           <Route path="/setting" element={<Setting />} />

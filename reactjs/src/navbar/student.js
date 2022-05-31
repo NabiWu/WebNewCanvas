@@ -1,5 +1,4 @@
-
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Link, Navigate } from "react-router-dom";
 import Home from "../components/home";
 import Profile from "../components/profile";
 import Dashboard from "../components/dashboard";
@@ -11,9 +10,9 @@ import ShowAdminAssignments from "../components/showAdminAssignments";
 import ShowStudentAssignments from "../components/showStudentAssignments";
 
 function Student() {
-  const {token, logout} = AuthUser();
+  const { token, logout } = AuthUser();
   const logoutUser = () => {
-    if (token !== undefined){
+    if (token !== undefined) {
       logout();
 
     }
@@ -47,7 +46,7 @@ function Student() {
       </nav>
       <div className="container">
         <Routes>
-          <Route path="/" element={<Profile />} />
+          <Route exact path="/" element={<Navigate replace to="/profile" />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/dashboard" element={<StudentDashboard />} />
           <Route path="/student/courses" element={<StudentCourse />} />

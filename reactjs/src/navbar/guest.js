@@ -1,5 +1,5 @@
 
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Link, Navigate } from "react-router-dom";
 import Home from "../components/home";
 import Login from "../components/login";
 import Register from "../components/register";
@@ -29,7 +29,7 @@ function Guest() {
       </nav>
       <div className="container">
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route exact path="/" element={<Navigate replace to="/login" />} />
           <Route path="/resetpassword" element={<VerifyEmail />} />
           <Route
             path="/resetpassword/securityQestion"

@@ -1,5 +1,5 @@
 
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Link, Navigate } from "react-router-dom";
 import Home from "../components/home";
 import Profile from "../components/profile";
 import Dashboard from "../components/dashboard";
@@ -12,10 +12,10 @@ import TeacherGrades from "../components/teacherViewGrades";
 
 
 function Teacher() {
-  const {token, logout} = AuthUser();
+  const { token, logout } = AuthUser();
 
   const logoutUser = () => {
-    if (token !== undefined){
+    if (token !== undefined) {
       logout();
     }
   }
@@ -49,7 +49,7 @@ function Teacher() {
       </nav>
       <div className="container">
         <Routes>
-          <Route path="/" element={<Profile />} />
+          <Route exact path="/" element={<Navigate replace to="/profile" />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/dashboard" element={<TeacherDashboard />} />
           <Route path="/teacher/courses" element={<TeacherCourse />} />
