@@ -52,7 +52,7 @@ function ShowStudentAssignments() {
     return (
       <Modal show={unsubmittedShow} onHide={handleUnSubmittedClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Assign Grade:</Modal.Title>
+          <Modal.Title>Write Answer:</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
@@ -164,12 +164,13 @@ function ShowStudentAssignments() {
     });
   }
   const submitAnswer = async () => {
-      await http.post("student/" + user["id"] + "/assignment/" + assiId, {
-        student_id: user.id,
-        course_id: id,
-        assignment_id: assiId,
-        grade: grade,
-      });
+    await http.post("student/" + user["id"] + "/assignment/" + assiId, {
+      student_id: user.id,
+      course_id: id,
+      assignment_id: assiId,
+      grade: grade,
+      answer: answer,
+    });
     handleUnSubmittedClose();
     window.location.reload(false);
   };
