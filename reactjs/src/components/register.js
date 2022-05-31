@@ -95,6 +95,9 @@ export default function Register() {
         })
         .then((res) => {
           navigate("/login");
+        }).catch((err)=>{
+          alert(err['response']['data']['message'])
+          console.log(err);
         });
     }
   };
@@ -113,7 +116,7 @@ export default function Register() {
               onChange={(e) => setRole("teacher")}
               id="flexRadioDefault1"
             />
-            <label className="form-check-label">teacher</label>
+            <label htmlFor="flexRadioDefault1" className="form-check-label">teacher</label>
           </div>
           <div className="form-check">
             <input
@@ -124,7 +127,7 @@ export default function Register() {
               id="flexRadioDefault2"
               defaultChecked
             />
-            <label className="form-check-label">student</label>
+            <label htmlFor="flexRadioDefault2" className="form-check-label">student</label>
           </div>
 
           <div className="form-group">
