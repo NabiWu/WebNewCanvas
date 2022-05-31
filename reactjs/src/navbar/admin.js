@@ -29,11 +29,6 @@ function Admin() {
       <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
         <ul className="navbar-nav">
           <li className="nav-item">
-            <Link className="nav-link" to="/">
-              Home
-            </Link>
-          </li>
-          <li className="nav-item">
             <Link className="nav-link" to="/profile">
               Profile
             </Link>
@@ -62,7 +57,7 @@ function Admin() {
       </nav>
       <div className="container">
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Profile />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
           <Route path="/setting" element={<Setting />} />
