@@ -24,7 +24,26 @@ const Questions = [
     question: "What is the name of your favorite pet?",
   },
 ];
+function check_pwd(pwd) {
+  let rule1 = (pwd.length >= 5);
+  let rule2 = false;
+  let rule3 = false;
+  let special_char = '!@#$%';
+  for (let i = 0; i < special_char.length; i++) {
+    if (pwd.includes(special_char[i])) {
+      rule2 = true;
+      break;
+    }
+  }
 
+  for (let i = 0; i < 10; i++) {
+    if (pwd.includes(i.toString())) {
+      rule3 = true;
+      break;
+    }
+  }
+  return rule1 && rule2 && rule3;
+}
 export default function Register() {
   const userRef = useRef();
   const errRef = useRef();
@@ -63,7 +82,7 @@ export default function Register() {
   }, [email]);
 
   useEffect(() => {
-    const result = PWD_REGEX.test(password);
+    const result = check_pwd(password);
     // console.log(result);
     // console.log(password);
     setValidPassword(result);
@@ -95,7 +114,7 @@ export default function Register() {
         })
         .then((res) => {
           navigate("/login");
-        }).catch((err)=>{
+        }).catch((err) => {
           alert(err['response']['data']['message'])
           console.log(err);
         });
@@ -170,10 +189,9 @@ export default function Register() {
               id="pwd"
             />
             <p className="text-muted small">
-              5 to 24 characters.
+              longer than 5 characters
               <br />
-              Must include uppercase and lowercase letters, a number and a
-              special character.
+              Must include at least a digit and a special character.
               <br />
               Allowed special characters:{" "}
               <span aria-label="exclamation mark">!</span>{" "}
